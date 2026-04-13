@@ -1,95 +1,161 @@
 
-import React from "react";
+import { useState, useEffect } from 'react';
 import { Box, Rating, Typography, Grid, Card, CardContent } from "@mui/material";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
 
-import searchRentals from "../models/RentalModel.jsx";
-
-const columns = [
-    {
-        field: 'title',
-        headerName: 'Title',
-        width: 500
-    },
-    {
-        field: 'rent',
-        headerName: 'Rent',
-        width: 80,
-        valueFormatter: (value) => {
-            if (!value || typeof value !== 'number') {
-                return value;
-            }
-            return `$${value.toLocaleString()}`;
-        },
-    },
-    {
-        field: 'propertyType',
-        headerName: 'Property Type',
-        width: 150,
-    },
-    {
-        field: 'postcode',
-        headerName: 'Postcode',
-        width: 110,
-    },
-    {
-        field: 'state',
-        headerName: 'State',
-        width: 150,
-    },
-    {
-        field: 'suburb',
-        headerName: 'Suburb',
-        width: 150,
-    },
-    {
-        field: 'bathrooms',
-        headerName: '# Bathrooms',
-        width: 150,
-    },
-    {
-        field: 'bedrooms',
-        headerName: '# Bedrooms',
-        width: 150,
-    },
-    {
-        field: 'parkingSpaces',
-        headerName: '# Parks',
-        width: 150,
-    },
-    {
-        field: 'averageRating',
-        headerName: 'Rating',
-        width: 180,
-        renderCell: (params) => (
-            <Rating
-                value={params.value}
-                precision={0.1}
-                readOnly
-            />
-        ),
-    }
-
-];
-
+import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.jsx";
 
 export default function DataGridDemo() {
-    const rows = searchRentals();
+    const [states, setStates] = useState([]);
+    const [propertyTypes, setPropertyTypes] = useState([]);
+
+    const [rows, setRows] = useState([]);
+    const [rowCount, setRowCount] = useState(0);
+
+    const [paginationModel, setPaginationModel] = useState({
+        page: 0,       // DataGrid is 0-based
+        pageSize: 10,
+    });
+
+    const [sortModel, setSortModel] = useState([]);
+    const [filterModel, setFilterModel] = useState({ items: [] });
+
+    useEffect(() => {
+        async function loadData() {
+            const statesData = await getStates();
+            const propertyTypesData = await getPropertyTypes();
+
+            setStates(statesData);
+            setPropertyTypes(propertyTypesData);
+        }
+
+        loadData();
+    }, []);
+
+    useEffect(() => {
+        async function fetchData() {
+            const data = await searchRentals(paginationModel, sortModel, filterModel);
+
+            setRows(data.data);
+            setRowCount(data.pagination.total);
+        }
+
+        fetchData();
+    }, [paginationModel, sortModel, filterModel]);
+
+    const columns = [
+        {
+            field: 'title',
+            headerName: 'Title',
+            width: 500,
+            filterOperators: getGridStringOperators().filter(
+                (op) => op.value === 'contains'
+            )
+        },
+        {
+            field: 'rent',
+            headerName: 'Rent',
+            width: 80,
+            valueFormatter: (value) => {
+                if (!value || typeof value !== 'number') {
+                    return value;
+                }
+                return `$${value.toLocaleString()}`;
+            },
+        },
+        {
+            field: 'propertyType',
+            headerName: 'Property Type',
+            width: 150,
+            type: 'singleSelect',
+            valueOptions: propertyTypes
+        },
+        {
+            field: 'postcode',
+            headerName: 'Postcode',
+            width: 110,
+            filterOperators: getGridStringOperators().filter(
+                (op) => op.value === 'contains'
+            )
+        },
+        {
+            field: 'state',
+            headerName: 'State',
+            width: 150,
+            type: 'singleSelect',
+            valueOptions: states,
+        },
+        {
+            field: 'suburb',
+            headerName: 'Suburb',
+            width: 150,
+            filterOperators: getGridStringOperators().filter(
+                (op) => op.value === 'contains'
+            )
+        },
+        {
+            field: 'bathrooms',
+            headerName: '# Bathrooms',
+            width: 150,
+            filterOperators: getGridNumericOperators().filter(
+                (op) => op.value === '>' || op.value === '<'
+            ),
+        },
+        {
+            field: 'bedrooms',
+            headerName: '# Bedrooms',
+            width: 150,
+            // type: 'number',
+            filterOperators: getGridNumericOperators().filter(
+                (op) => op.value === '>' || op.value === '<'
+            ),
+        },
+        {
+            field: 'parkingSpaces',
+            headerName: '# Parks',
+            width: 150,
+            filterOperators: getGridNumericOperators().filter(
+                (op) => op.value === '>' || op.value === '<'
+            ),
+        },
+        {
+            field: 'averageRating',
+            headerName: 'Rating',
+            width: 180,
+            filterOperators: getGridNumericOperators().filter(
+                (op) => op.value === '>' || op.value === '<'
+            ),
+            renderCell: (params) => (
+                <Rating
+                    value={params.value}
+                    precision={0.1}
+                    readOnly
+                />
+            ),
+        }
+
+    ];
+
+    // const rows = await searchRentals();
     return (
         <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid
-                rows={rows.data}
+                rows={rows}
                 columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 5,
-                        },
-                    },
-                }}
-                pageSizeOptions={[5]}
-                checkboxSelection
-                disableRowSelectionOnClick
+                rowCount={rowCount}
+
+                paginationMode="server"
+                sortingMode="server"
+                filterMode="server"
+
+                paginationModel={paginationModel}
+                onPaginationModelChange={setPaginationModel}
+
+                sortModel={sortModel}
+                onSortModelChange={setSortModel}
+
+                filterModel={filterModel}
+                onFilterModelChange={setFilterModel}
             />
         </Box>
     );
