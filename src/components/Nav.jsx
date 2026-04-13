@@ -26,7 +26,7 @@ export default function Nav() {
             <Button component={Link} to="/About" color="inherit">
               About Us
             </Button>
-            <Button component={Link} to="/About" color="inherit">
+            <Button component={Link} to="/Rentals" color="inherit">
               Property Search
             </Button>
             <Button component={Link} to="/About" color="inherit">

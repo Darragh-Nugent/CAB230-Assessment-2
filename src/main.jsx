@@ -7,7 +7,7 @@ import './index.css';
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import Menu from './pages/Menu.jsx';
-import Book from './pages/Book.jsx';
+import Rentals from './pages/Rentals.jsx';
 import About from './pages/About.jsx';
 
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "menu", Component: Menu },
-      { path: "book", Component: Book },
+      { path: "rentals", Component: Rentals },
       { path: "about", Component: About },
     ],
   },
