@@ -13,12 +13,12 @@ import HomeIcon from '@mui/icons-material/Home';
 export default function Nav() {
   return (
     <>
-      <AppBar position="sticky" color="primary">
+      <AppBar position="sticky" color="secondary">
         <Container>
           <Toolbar>
             <HomeIcon />
             <Typography variant="h5" sx = {{flexGrow: 1}}>
-              Yo
+              We Are So F***ked.com
             </Typography>
             <Button component={Link} to="/" color="inherit">
               Home

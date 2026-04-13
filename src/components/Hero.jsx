@@ -7,7 +7,7 @@ const Hero = () => {
         <Container id="home" maxWidth={false} disableGutters>
             <Stack
                 direction={{ xs: 'column', md: 'row' }}
-                spacing={2}
+                spacing={0}
                 sx={{
                     width: '100%',
                     justifyContent: 'center'
@@ -17,10 +17,14 @@ const Hero = () => {
                 <Box
                     sx={{
                         width: "50%",
+                        margin: 0
                     }}
                 >
                     <img src={SadGuy} alt="sad fella"
-                        style={{ width: '100%' }}
+                        style={{
+                             width: '100%',
+                             display: 'block'
+                            }}
                     />
                 </Box>
                 <Box
@@ -32,19 +36,29 @@ const Hero = () => {
                         // display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        gap: '.5rem',
-                        backgroundColor: 'primary.main'
+                        gap: '1.5rem',
+                        backgroundColor: 'primary.main',
+                        color: 'primary.contrastText'
                     }}
                 >
-                    <Typography variant="h1" sx={{ fontSize: { xs: '3rem', md: '4rem' } }}>Coffee For All</Typography>
-                    <Typography variant='h4' sx={{ fontSize: { xs: '1rem', md: '1.5rem' } }}>
-                        The coffee revolution starts now.
-                    </Typography>
-                    <Button variant="contained" color='secondary' href="#coffee">Order Now</Button>
+                    <Stack
+                        spacing={2}
+                        sx={{
+                            paddingLeft: "1em",
+                        }}
+                    >
+                        <Typography variant="h1" sx={{ fontSize: { xs: '3rem', md: '4rem' } }}>
+                            We are so f***ked.com
+                        </Typography>
+                        <Typography variant='h4' sx={{ fontSize: { xs: '1rem', md: '1.5rem' } }}>
+                            The perfect place for all your incredibly high priced needs.
+                        </Typography>
+                        <Box>
+                            <Button variant="contained" color='secondary' href="#coffee">Order Now</Button>
+                        </Box>
+                    </Stack>
                 </Box>
-
             </Stack>
-
         </Container>
     )
 }
