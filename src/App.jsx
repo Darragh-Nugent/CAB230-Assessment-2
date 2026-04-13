@@ -6,8 +6,12 @@ import './App.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from './assets/theme';
+
 function AppLayout() {
   return (
+    
     <div className="App">
       <Header />
       <Outlet />
@@ -17,8 +21,12 @@ function AppLayout() {
 }
 
 function App() {
-  return <AppLayout />;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppLayout />
+    </ThemeProvider>
+  );
 }
-  
 
 export default App;
