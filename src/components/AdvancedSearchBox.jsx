@@ -52,45 +52,47 @@ function AdvancedSearchOption(props) {
 
     useEffect(() => {
         setFilterModel(prevFilters => ({
-            
+
             ...prevFilters,
             [field]: {
                 ...prevFilters[field],
                 min: minValue,
                 max: maxValue,
             }
-            
+
         }))
-},
-[minValue, maxValue]);
+    },
+        [minValue, maxValue]);
 
 
-return (
-    <Stack direction="row" spacing={2} alignItems="center">
-        <Box sx={{ width: 180 }}>
-            <Typography>{min}</Typography>
-        </Box>
+    return (
+        <Stack direction="row" spacing={2} alignItems="center">
+            <Box sx={{ width: 180 }}>
+                <Typography>{min}</Typography>
+            </Box>
 
-        <TextField
-            size="small"
-            label="Minimum value"
-            // min={0}
-            value={minValue}
-            onChange={(e) => setMinValue(e.target.value)}
-        />
+            <TextField
+                size="small"
+                label="Minimum value"
+                min={0}
+                type='number'
+                value={minValue}
+                onChange={(e) => setMinValue(e.target.value)}
+            />
 
-        <Box sx={{ width: 180 }}>
-            <Typography>{max}</Typography>
-        </Box>
+            <Box sx={{ width: 180 }}>
+                <Typography>{max}</Typography>
+            </Box>
 
-        <NumberField
-            size="small"
-            label="Maximum value"
-        // min={0}
-        // value={maxValue}
-        // onChange={(e, value) => setMaxValue(value)}
-        />
+            <TextField
+                size="small"
+                label="Maximum value"
+                min={0}
+                type='number'
+                value={maxValue}
+                onChange={(e) => setMaxValue(e.target.value)}
+            />
 
-    </Stack>
-);
+        </Stack>
+    );
 }
