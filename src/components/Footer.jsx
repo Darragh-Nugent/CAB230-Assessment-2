@@ -11,7 +11,7 @@ export default function Footer() {
       p: "1em"
     }}>
       <Typography variant="body1" sx={{ mb: 1 }}>
-        We are so f***hed.com
+        High Rise
       </Typography>
       <Typography variant="body1">
         Copyright &copy; 2026{" "}

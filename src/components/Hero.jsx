@@ -48,7 +48,7 @@ const Hero = () => {
                         }}
                     >
                         <Typography variant="h1" sx={{ fontSize: { xs: '3rem', md: '4rem' } }}>
-                            We are so f***ked.com
+                            High Rise
                         </Typography>
                         <Typography variant='h4' sx={{ fontSize: { xs: '1rem', md: '1.5rem' } }}>
                             The perfect place for all your incredibly high priced needs.

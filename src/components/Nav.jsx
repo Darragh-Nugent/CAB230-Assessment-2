@@ -18,7 +18,7 @@ export default function Nav() {
           <Toolbar>
             <HomeIcon />
             <Typography variant="h5" sx = {{flexGrow: 1}}>
-              We Are So F***ked.com
+              High Rise
             </Typography>
             <Button component={Link} to="/" color="inherit">
               Home
