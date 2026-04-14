@@ -10,6 +10,11 @@ const theme = createTheme({
       main: '#768938',
       contrastText: '#FFF',
     },
+    custom: {
+      backgroundLight: '#f7f5f3',
+      card: '#ffffff',
+      border: '#e0e0e0',
+    }
   },
 });
 

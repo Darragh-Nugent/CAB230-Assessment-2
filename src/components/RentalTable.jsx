@@ -49,7 +49,7 @@ export default function DataGridDemo() {
             headerName: 'Title',
             width: 500,
             filterOperators: getGridStringOperators().filter(
-                (op) => op.value === 'contains'
+                (op) => op.value === 'equals'
             )
         },
         {
@@ -67,21 +67,21 @@ export default function DataGridDemo() {
             field: 'propertyType',
             headerName: 'Property Type',
             width: 150,
-            type: 'singleSelect',
+            type: 'multiSelect',
             valueOptions: propertyTypes
         },
         {
             field: 'postcode',
             headerName: 'Postcode',
-            width: 110,
+            width: 80,
             filterOperators: getGridStringOperators().filter(
-                (op) => op.value === 'contains'
+                (op) => op.value === 'equals'
             )
         },
         {
             field: 'state',
             headerName: 'State',
-            width: 150,
+            width: 80,
             type: 'singleSelect',
             valueOptions: states,
         },
@@ -90,13 +90,13 @@ export default function DataGridDemo() {
             headerName: 'Suburb',
             width: 150,
             filterOperators: getGridStringOperators().filter(
-                (op) => op.value === 'contains'
+                (op) => op.value === 'equals'
             )
         },
         {
             field: 'bathrooms',
             headerName: '# Bathrooms',
-            width: 150,
+            width: 100,
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
             ),
@@ -104,7 +104,7 @@ export default function DataGridDemo() {
         {
             field: 'bedrooms',
             headerName: '# Bedrooms',
-            width: 150,
+            width: 100,
             // type: 'number',
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
@@ -113,7 +113,7 @@ export default function DataGridDemo() {
         {
             field: 'parkingSpaces',
             headerName: '# Parks',
-            width: 150,
+            width: 80,
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
             ),
@@ -121,7 +121,7 @@ export default function DataGridDemo() {
         {
             field: 'averageRating',
             headerName: 'Rating',
-            width: 180,
+            width: 150,
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
             ),
@@ -138,7 +138,7 @@ export default function DataGridDemo() {
 
     // const rows = await searchRentals();
     return (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={{ height: 650, width: '100%' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -156,6 +156,32 @@ export default function DataGridDemo() {
 
                 filterModel={filterModel}
                 onFilterModelChange={setFilterModel}
+
+                sx={{
+                    border: 'none',
+                    '& .MuiDataGrid-columnHeaders': {
+                        backgroundColor: '#14c58a', // Set your color here
+                    },
+
+                        '& .MuiDataGrid-columnHeaderTitle': {
+                            // color: 'primary.contrastText',
+                        //     fontWeight: 600,
+                        },
+
+                        '& .MuiDataGrid-row:hover': {
+                        bgcolor: 'rgba(118, 137, 56, 0.08)', // soft green hover
+                    },
+
+                    '& .MuiDataGrid-cell': {
+                        borderBottom: '1px solid',
+                        borderColor: 'custom.border',
+                    },
+
+                    '& .MuiDataGrid-footerContainer': {
+                        border: 'none',
+                    },
+                }
+                }
             />
         </Box>
     );
