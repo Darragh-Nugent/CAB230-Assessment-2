@@ -16,16 +16,17 @@ export function getPropertyTypes() {
         .then((res) => res.json())
 }
 
-export async function searchRentals(paginationModel, sortingModel, filterModel) {
+export async function searchRentals(paginationModel, sortModel, tableFilterModel, advancedFilterModel) {
     const params = new URLSearchParams();
+
     params.append("page", paginationModel.page + 1);
 
-    if (sortingModel.length > 0) {
-        params.append("sortBy", sortingModel[0].field);
-        params.append("sortOrder", sortingModel[0].sort);
+    if (sortModel.length > 0) {
+        params.append("sortBy", sortModel[0].field);
+        params.append("sortOrder", sortModel[0].sort);
     }
 
-    filterModel.items.forEach(filterItem => {
+    tableFilterModel.items.forEach(filterItem => {
         let field;
         switch (filterItem.field) {
             case "suburb":
@@ -40,35 +41,51 @@ export async function searchRentals(paginationModel, sortingModel, filterModel) 
                 field = "postcode";
                 break;
 
+            default:
+                break;
+        }
+
+        if (field && filterItem.value) {
+            params.append(field, filterItem.value);
+        }
+    });
+
+    Object.entries(advancedFilterModel).forEach(([field, values]) => {
+        let fieldMin;
+        let fieldMax;
+
+        switch (field) {
             case "rent":
-                field = filterItem.operator === ">" ? "minimumRent" : "maximumRent";
+                fieldMin = "minimumRent";
+                fieldMax = "maximumRent";
                 break;
 
             case "bathrooms":
-                field = filterItem.operator === ">" ? "minimumBathrooms" : "maximumBathrooms";
+                fieldMin = "minimumBathrooms";
+                fieldMax = "maximumBathrooms";
                 break;
 
             case "bedrooms":
-                field = filterItem.operator === ">" ? "minimumBedrooms" : "maximumBedrooms";
+                fieldMin = "minimumBedrooms";
+                fieldMax = "maximumBedrooms";
                 break;
 
             case "parkingSpaces":
-                field = filterItem.operator === ">" ? "minimumParking" : "maximumParking";
+                fieldMin = "minimumParking";
+                fieldMax = "maximumParking";
                 break;
 
             case "averageRating":
-                field = filterItem.operator === ">" ? "minimumRating" : "maximumRating";
+                fieldMin = "minimumRating";
+                fieldMax = "maximumRating";
                 break;
 
             default:
                 break;
-
-        }
-        
-        if (field && filterItem.value) {
-            params.append(field, filterItem.value);
         }
 
+        if (values.min !== '') params.append(fieldMin, values.min);
+        if (values.max !== '') params.append(fieldMax, values.max);
     });
 
     const response = await fetch(`${path}search?${params.toString()}`);

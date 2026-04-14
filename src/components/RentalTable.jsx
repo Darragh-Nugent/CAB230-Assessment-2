@@ -5,7 +5,7 @@ import { DataGrid, getGridNumericOperators, getGridStringOperators } from '@mui/
 
 import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.jsx";
 
-export default function DataGridDemo() {
+export default function RentalTable({ tableFilterModel, setTableFilterModel, advancedFilterModel, setAdvancedFilterModel }) {
     const [states, setStates] = useState([]);
     const [propertyTypes, setPropertyTypes] = useState([]);
 
@@ -18,7 +18,6 @@ export default function DataGridDemo() {
     });
 
     const [sortModel, setSortModel] = useState([]);
-    const [filterModel, setFilterModel] = useState({ items: [] });
 
     useEffect(() => {
         async function loadData() {
@@ -34,14 +33,14 @@ export default function DataGridDemo() {
 
     useEffect(() => {
         async function fetchData() {
-            const data = await searchRentals(paginationModel, sortModel, filterModel);
+            const data = await searchRentals(paginationModel, sortModel, tableFilterModel, advancedFilterModel);
 
             setRows(data.data);
             setRowCount(data.pagination.total);
         }
 
         fetchData();
-    }, [paginationModel, sortModel, filterModel]);
+    }, [paginationModel, sortModel, tableFilterModel, advancedFilterModel]);
 
     const columns = [
         {
@@ -148,14 +147,14 @@ export default function DataGridDemo() {
                 sortingMode="server"
                 filterMode="server"
 
+                filterModel={tableFilterModel}
+                onFilterModelChange={setTableFilterModel}
+
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
 
                 sortModel={sortModel}
                 onSortModelChange={setSortModel}
-
-                filterModel={filterModel}
-                onFilterModelChange={setFilterModel}
 
                 sx={{
                     border: 'none',
@@ -163,12 +162,12 @@ export default function DataGridDemo() {
                         backgroundColor: '#14c58a', // Set your color here
                     },
 
-                        '& .MuiDataGrid-columnHeaderTitle': {
-                            // color: 'primary.contrastText',
+                    '& .MuiDataGrid-columnHeaderTitle': {
+                        // color: 'primary.contrastText',
                         //     fontWeight: 600,
-                        },
+                    },
 
-                        '& .MuiDataGrid-row:hover': {
+                    '& .MuiDataGrid-row:hover': {
                         bgcolor: 'rgba(118, 137, 56, 0.08)', // soft green hover
                     },
 
