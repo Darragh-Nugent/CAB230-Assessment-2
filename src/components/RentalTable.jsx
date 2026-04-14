@@ -55,6 +55,7 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
             field: 'rent',
             headerName: 'Rent',
             width: 80,
+            filterable: false,
             valueFormatter: (value) => {
                 if (!value || typeof value !== 'number') {
                     return value;
@@ -96,6 +97,7 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
             field: 'bathrooms',
             headerName: '# Bathrooms',
             width: 100,
+            filterable: false,
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
             ),
@@ -105,6 +107,7 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
             headerName: '# Bedrooms',
             width: 100,
             // type: 'number',
+            filterable: false,
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
             ),
@@ -113,6 +116,7 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
             field: 'parkingSpaces',
             headerName: '# Parks',
             width: 80,
+            filterable: false,
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
             ),
@@ -121,6 +125,7 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
             field: 'averageRating',
             headerName: 'Rating',
             width: 150,
+            filterable: false,
             filterOperators: getGridNumericOperators().filter(
                 (op) => op.value === '>' || op.value === '<'
             ),
@@ -132,7 +137,6 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
                 />
             ),
         }
-
     ];
 
     // const rows = await searchRentals();
