@@ -14,6 +14,10 @@ const theme = createTheme({
       backgroundLight: '#f7f5f3',
       card: '#ffffff',
       border: '#e0e0e0',
+    },
+    text: {
+      primary: "#000",
+      secondary: "#727272",
     }
   },
 });

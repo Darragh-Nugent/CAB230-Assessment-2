@@ -13,7 +13,18 @@ export function getStates() {
 
 export function getPropertyTypes() {
     return fetch(path + "property-types")
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(`HTTP error: ${res.status}`);
+            }
+            return res.json();
+        })
+        .catch(error => console.log(error));
+}
+
+export function getProperty(id) {
+    return fetch(path + id)
+        .then((res) => res.json());
 }
 
 export async function searchRentals(paginationModel, sortModel, tableFilterModel, advancedFilterModel) {
