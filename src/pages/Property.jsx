@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 
-import { Box, Container, Typography, Grid, Stack, Rating, Chip } from "@mui/material";
+import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent } from "@mui/material";
 import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';
 import BathroomIcon from '@mui/icons-material/Bathroom';
@@ -18,59 +18,82 @@ export default function Property({ id }) {
 
 
     return (
-        <Container maxWidth="lg">
-            <Box>
-                <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>{property.title}</Typography>
-            </Box>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={8}>
-                    <Typography variant="h3" color="primary.main">${property.rent}</Typography>
+        <Container maxWidth="xl">
 
-                    <Typography variant="subtitle1" color="text.secondary">{property.streetAddress}, {property.suburb} {property.postcode}</Typography>
+            <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: 600 }}>{property.title}</Typography>
 
-                    <Stack direction='row' spacing={2}>
-                        <Box>
-                            <BedIcon />
-                            <Typography variant="body1" color="primary.main">{property.bedrooms}</Typography>
-                        </Box>
+            <Grid container spacing={3}>
+                <Grid size={{ xs: 12, md: 7 }}>
+                    <Card sx={{ height: "100%", bgcolor: 'custom.card', borderRadius: 3 }}>
+                        <CardContent>
 
-                        <Box>
-                            <BathroomIcon />
-                            <Typography variant="body1" color="primary.main">{property.bathrooms}</Typography>
-                        </Box>
+                            <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>${property.rent}</Typography>
 
-                        <Box>
-                            <GarageIcon />
-                            <Typography variant="body1" color="primary.main">{property.parkingSpaces}</Typography>
-                        </Box>
-                    </Stack>
+                            <Typography variant="body1" color="text.secondary" sx={{ mt: 1, color: 'text.secondary' }}>
+                                {property.streetAddress}, {property.suburb} {property.postcode}
+                            </Typography>
 
-                    <Rating
-                        value={property.averageRating}
-                        precision={0.1}
-                        readOnly
-                    />
+                            <Stack direction='row' spacing={4} sx={{ mt: 3 }}>
+                                <Stack direction='row' spacing={1}>
+                                    <BedIcon />
+                                    <Typography variant="body1" color="primary.main">{property.bedrooms}</Typography>
+                                </Stack>
 
-                    <Chip label={property.propertyType} />
+                                <Stack direction='row' spacing={1}>
+                                    <BathroomIcon />
+                                    <Typography variant="body1" color="primary.main">{property.bathrooms}</Typography>
+                                </Stack>
 
-                    {amenities.map((amenity) => (
-                        <Chip key={amenity} label={amenity} />
-                    ))}
+                                <Stack direction='row' spacing={1}>
+                                    <GarageIcon />
+                                    <Typography variant="body1" color="primary.main">{property.parkingSpaces}</Typography>
+                                </Stack>
+                            </Stack>
 
-                    <Box>
-                        <Typography variant="h6" color="primary.main">Description</Typography>
-                        <div dangerouslySetInnerHTML={{ __html: property.description }}></div>
-                    </Box>
+                            <Box sx={{ mt: 3 }}>
+                                <Rating
+                                    value={property.averageRating}
+                                    precision={0.1}
+                                    readOnly
+                                />
+                            </Box>
 
-                    <Typography variant="caption" color="text.secondary">Listed by {property.agencyName}</Typography>
+                            <Stack direction="row" spacing={2} sx={{ mt: 2, flexWrap: "wrap" }}>
+                                <Box>
+                                    <Chip label={property.propertyType} sx={{ mt: 1, ml: 2 }} />
+                                </Box>
+
+                                {amenities.map((amenity) => (
+                                    <Box>
+                                        <Chip key={amenity} label={amenity} sx={{ mt: 1 }} />
+                                    </Box>
+                                ))}
+                            </Stack>
+
+
+                            <Box sx={{ mt: 4 }}>
+                                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>Description</Typography>
+
+                                <Box sx={{ lineHeight: 1.6 }}
+                                    dangerouslySetInnerHTML={{ __html: property.description }}
+                                />
+                            </Box>
+
+                            <Typography variant="caption" sx={{ color: 'text.secondary' }}>Listed by {property.agencyName}</Typography>
+                        </CardContent>
+                    </Card>
                 </Grid>
 
-                <Grid item xs={12} md={4}>
-
+                <Grid size={{ xs: 12, md: 5 }}>
+                    <Card sx={{ height: "100%", borderRadius: 3 }}>
+                        <Box sx={{ width: "100%", height: "100%" }}>
+                            {(property.latitude != null && property.longitude != null) ? <MapPart latitude={property.latitude} longitude={property.longitude} /> : null}
+                        </Box>
+                    </Card>
                 </Grid>
             </Grid>
-            {(property.latitude != null && property.longitude != null) ? <MapPart latitude={property.latitude} longitude={property.longitude} /> : null}
 
-        </Container>
+
+        </Container >
     );
 }

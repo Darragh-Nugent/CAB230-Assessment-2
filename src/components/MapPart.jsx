@@ -1,28 +1,37 @@
-import { Map, Marker } from "pigeon-maps"
-import { osm } from 'pigeon-maps/providers'
-
-import { Box } from "@mui/material";
-import RoomIcon from '@mui/icons-material/Room';
+import { useRef, useState, useEffect } from "react";
+import { Map, Marker } from "pigeon-maps";
+import { osm } from "pigeon-maps/providers";
 
 export default function MapPart({ latitude, longitude }) {
+    const containerRef = useRef(null);
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+
+
+    useEffect(() => {
+        if (containerRef.current) {
+            setWidth(containerRef.current.offsetWidth);
+            setHeight(containerRef.current.offsetHeight)
+        }
+    }, []);
+
     return (
-        <Box sx={{ width: "100%", height: '100%' }}>
-            <Map
-                provider={osm}
-                height={200}
-                // width={400}
-                center={[latitude, longitude]}
-                defaultZoom={15}
-            >
-                <Marker
-                    width={50}
-                    color="green"
-                    anchor={[latitude, longitude]}
+        <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
+            {width > 0 && (
+                <Map
+                    provider={osm}
+                    width={width}
+                    height={height}
+                    center={[latitude, longitude]}
+                    defaultZoom={15}
                 >
-                </Marker>
-            </Map>
-        </Box>
-
-
+                    <Marker
+                        width={50}
+                        color="green"
+                        anchor={[latitude, longitude]}
+                    />
+                </Map>
+            )}
+        </div>
     );
 }
