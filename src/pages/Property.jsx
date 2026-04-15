@@ -6,8 +6,9 @@ import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';
 import BathroomIcon from '@mui/icons-material/Bathroom';
 
-import { getProperty } from "../models/RentalModel.jsx";
 import { useLoaderData } from "react-router-dom";
+
+import MapPart from "../components/MapPart.jsx";
 
 
 export default function Property({ id }) {
@@ -22,7 +23,7 @@ export default function Property({ id }) {
                 <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>{property.title}</Typography>
             </Box>
             <Grid container spacing={2}>
-                <Grid size>
+                <Grid item xs={12} md={8}>
                     <Typography variant="h3" color="primary.main">${property.rent}</Typography>
 
                     <Typography variant="subtitle1" color="text.secondary">{property.streetAddress}, {property.suburb} {property.postcode}</Typography>
@@ -58,24 +59,18 @@ export default function Property({ id }) {
 
                     <Box>
                         <Typography variant="h6" color="primary.main">Description</Typography>
-                        <Typography variant="body1" color="text.primary">{property.description}</Typography>
+                        <div dangerouslySetInnerHTML={{ __html: property.description }}></div>
                     </Box>
 
                     <Typography variant="caption" color="text.secondary">Listed by {property.agencyName}</Typography>
                 </Grid>
 
-                <Grid>
-                    
+                <Grid item xs={12} md={4}>
+
                 </Grid>
             </Grid>
+            {(property.latitude != null && property.longitude != null) ? <MapPart latitude={property.latitude} longitude={property.longitude} /> : null}
 
         </Container>
     );
 }
-
-// function AmenityList(amenities) {
-//     return (
-
-//     )
-
-// }
