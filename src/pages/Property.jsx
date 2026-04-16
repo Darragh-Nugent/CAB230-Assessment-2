@@ -18,9 +18,9 @@ export default function Property() {
         <Container maxWidth="xl">
             <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: 600 }}>{property.title}</Typography>
 
-            <Grid container spacing={3}>
-                <Grid size={{ xs: 12, md: 7 }}>
-                    <Card sx={{ height: "100%", bgcolor: 'custom.card', borderRadius: 3 }}>
+            <Grid container spacing={3} sx={{my: 3}}>
+                <Grid size={{ xs: 12, md: 7}}>
+                    <Card sx={{ height: "100%", bgcolor: 'custom.card', borderRadius: 3, boxShadow: 3, }}>
                         <CardContent>
 
                             <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>${property.rent}</Typography>
@@ -52,12 +52,12 @@ export default function Property() {
 
                             <Stack direction="row" spacing={2} sx={{ mt: 2, flexWrap: "wrap" }}>
                                 <Box>
-                                    <Chip label={property.propertyType} sx={{ mt: 1, ml: 2 }} />
+                                    <Chip label={property.propertyType} color="primary" sx={{ mt: 1, ml: 2 }} />
                                 </Box>
 
                                 {amenities.map((amenity) => (
                                     <Box>
-                                        <Chip key={amenity} label={amenity} sx={{ mt: 1 }} />
+                                        <Chip key={amenity} label={amenity} color="primary" sx={{ mt: 1 }} />
                                     </Box>
                                 ))}
                             </Stack>
@@ -77,7 +77,7 @@ export default function Property() {
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 5 }}>
-                    <Card sx={{ height: "100%", borderRadius: 3 }}>
+                    <Card sx={{ height: "100%", borderRadius: 3, boxShadow: 3 }}>
                         <Box sx={{ width: "100%", height: "100%" }}>
                             {(property.latitude != null && property.longitude != null) ? <MapPart latitude={property.latitude} longitude={property.longitude} /> : null}
                         </Box>

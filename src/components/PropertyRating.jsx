@@ -6,6 +6,7 @@ import { getRating, postRating } from "../models/RatingModel.js"
 
 export default function PropertyRating({ propertyId, defaultRating }) {
     const [rating, setRating] = useState(defaultRating);
+    const [isUserRated, setIsUserRated] = useState(false);
     const [message, setMessage] = useState('');
     const [severity, setSeverity] = useState('');
     const [loading, setLoading] = useState(true);
@@ -28,6 +29,7 @@ export default function PropertyRating({ propertyId, defaultRating }) {
             try {
                 let response = await getRating(propertyId);
                 setRating(response.rating);
+                setIsUserRated(true);
             } catch (err) {
                 console.error(err.message)
             } finally {
@@ -39,15 +41,19 @@ export default function PropertyRating({ propertyId, defaultRating }) {
 
     return (
         loading ? null :
-        <>
-            <AlertBox message={message} setMessage={setMessage} severity={severity} />
+            <>
+                <AlertBox message={message} setMessage={setMessage} severity={severity} />
 
-            <Rating
-                value={rating}
-                precision={1}
-                onChange={(event, newRating) => handleRating(newRating)}
-            />
-        </>
+                <Stack spacing={0.5}>
+                    <Rating
+                        value={rating}
+                        precision={1}
+                        onChange={(event, newRating) => handleRating(newRating)}
+                    />
 
+                    {isUserRated ? <Typography variant="caption" color="text.secondary">Rated by you</Typography> : null}
+                </Stack>
+
+            </>
     );
 }
