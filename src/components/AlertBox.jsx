@@ -1,13 +1,14 @@
 import { Alert, Snackbar } from "@mui/material";
 
-export default function ErrorBox({ message, setMessage }) {
+
+export default function AlertBox({ message, setMessage, severity }) {
     return (
         <Snackbar
             open={!!message}
-            autoHideDuration={1500}
+            autoHideDuration={6000}
             onClose={() => setMessage('')}
         >
-            <Alert onClose={() => setMessage('')} severity="success">
+            <Alert onClose={() => setMessage('')} severity={severity}>
                 {message}
             </Alert>
         </Snackbar>

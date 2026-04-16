@@ -9,7 +9,7 @@ export async function login(email, password) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({email: email, password: password })
     })
         .then(response => {
             if (!response.ok) {
@@ -36,7 +36,7 @@ export async function register(email, password) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({email: email, password: password })
     })
         .then(response => {
             if (!response.ok) {

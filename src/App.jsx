@@ -4,7 +4,7 @@ import { useState, useEffect, createContext } from 'react';
 import './App.css';
 
 // components
-import SuccessBox from './components/SuccessBox.jsx';
+import AlertBox from './components/AlertBox.jsx';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AuthProvider from "./context/AuthContext.jsx";
@@ -19,7 +19,7 @@ function AppLayout() {
   return (
 
     <div className="App">
-      <SuccessBox message={message} setMessage={setMessage} />
+      <AlertBox message={message} setMessage={setMessage} severity={"success"} />
       <Header />
       <Outlet />
       <Footer />

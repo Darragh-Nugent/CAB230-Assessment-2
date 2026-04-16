@@ -1,23 +1,23 @@
+import { useLoaderData } from "react-router-dom";
+
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent } from "@mui/material";
 import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';
 import BathroomIcon from '@mui/icons-material/Bathroom';
 
-import { useLoaderData } from "react-router-dom";
-
 import MapPart from "../components/MapPart.jsx";
+import PropertyRating from "../components/PropertyRating.jsx";
+import { postRating } from "../models/RatingModel.js"
 
 
-export default function Property({ id }) {
-    const property = useLoaderData();
+export default function Property() {
+    const {property, id} = useLoaderData();
 
-    const [rating, setRating] = useState(property.averageRating);
 
     let amenities = property.amenities != null ? property.amenities.split(',') : [];
 
     return (
         <Container maxWidth="xl">
-
             <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: 600 }}>{property.title}</Typography>
 
             <Grid container spacing={3}>
@@ -49,11 +49,7 @@ export default function Property({ id }) {
                             </Stack>
 
                             <Box sx={{ mt: 3 }}>
-                                <Rating
-                                    defaultValue={rating}
-                                    precision={0.1}
-                                    onChange={(newRating) => setRating(newRating)}
-                                />
+                                <PropertyRating propertyId={id} defaultRating={property.averageRating}/>
                             </Box>
 
                             <Stack direction="row" spacing={2} sx={{ mt: 2, flexWrap: "wrap" }}>

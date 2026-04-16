@@ -28,7 +28,8 @@ const router = createBrowserRouter([
         path: "rentals/:id",
         loader: async ({ params }) => {
           let property = await getProperty(params.id);
-          return property;
+          let id = params.id;
+          return {property, id};
         },
         Component: Property,
       },

@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
 import { useAuth } from '../context/AuthContext.jsx';
-import ErrorBox from './ErrorBox.jsx';
+import AlertBox from './AlertBox.jsx';
 
 export default function LoginSection() {
     const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ export default function LoginSection() {
 
     return (
         <>
-            <ErrorBox message={errorMessage} setMessage={setErrorMessage} />
+            <AlertBox message={errorMessage} setMessage={setErrorMessage} severity={"error"} />
 
             <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>Login</Typography>
 
