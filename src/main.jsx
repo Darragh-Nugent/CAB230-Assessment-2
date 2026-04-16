@@ -14,6 +14,7 @@ import Rentals from './pages/Rentals.jsx';
 import About from './pages/About.jsx';
 import Property from './pages/Property.jsx';
 import Auth from './pages/Auth.jsx';
+import Ratings from './pages/Ratings.jsx'
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       },
       { path: "login", Component: Auth },
       { path: "register", Component: Auth },
+      { path: "ratings", Component: Ratings},
       { path: "about", Component: About },
     ],
   },

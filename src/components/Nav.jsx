@@ -36,7 +36,7 @@ export default function Nav() {
             {
               isAuthenticated ? (
                 <>
-                  <Button component={Link} to="/About" color="inherit">
+                  <Button component={Link} to="/Ratings" color="inherit">
                     My ratings
                   </Button>
                   <Button component={Link} to="/" color="inherit" onClick={() => {
