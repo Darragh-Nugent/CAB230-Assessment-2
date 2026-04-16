@@ -7,10 +7,9 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
 
+import { logout } from '../models/AuthModel.js';
 
-
-// navigation links
-export default function Nav({ authenticated }) {
+export default function Nav({ isAuthenticated, setIsAuthenticated }) {
   return (
     <>
       <AppBar position="sticky" color="secondary">
@@ -31,12 +30,15 @@ export default function Nav({ authenticated }) {
             </Button>
 
             {
-              authenticated ? (
+              isAuthenticated ? (
                 <>
                   <Button component={Link} to="/About" color="inherit">
                     My ratings
                   </Button>
-                  <Button component={Link} to="/About" state={{ authenticated: authenticated }} color="inherit">
+                  <Button component={Link} to="/" color="inherit" onClick={() => {
+                    logout();
+                    setIsAuthenticated(false);
+                  }}>
                     Log out
                   </Button>
                 </>

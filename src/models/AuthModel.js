@@ -26,3 +26,7 @@ export async function login(email, password) {
             throw error;
         });
 }
+
+export function logout() {
+    localStorage.removeItem('token');
+}
