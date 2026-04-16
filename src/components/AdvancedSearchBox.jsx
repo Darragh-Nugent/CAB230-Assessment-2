@@ -18,7 +18,7 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel }) {
             }}
         >
             <AccordionSummary
-                expandIcon={<ExpandMore />}
+                expandIcon={<ExpandMore sx={{ color: 'primary.contrastText' }} />}
                 sx={{
                     bgcolor: 'primary.main',
                     color: 'primary.contrastText',
