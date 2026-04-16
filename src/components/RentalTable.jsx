@@ -71,7 +71,7 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
             field: 'propertyType',
             headerName: 'Property Type',
             width: 150,
-            type: 'multiSelect',
+            type: 'singleSelect',
             valueOptions: propertyTypes
         },
         {
