@@ -2,8 +2,9 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
-import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
+import { Alert, Snackbar, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
+import ErrorBox from './ErrorBox.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 
 export default function RegisterSection() {
@@ -27,11 +28,15 @@ export default function RegisterSection() {
     const [passwordHelperText, setPasswordHelperText] = useState('');
     const [confirmPasswordHelperText, setConfirmPasswordHelperText] = useState('');
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const navigate = useNavigate();
-    const { handleLogin } = useAuth();
+    const { handleRegister } = useAuth();
 
     return (
         <>
+            <ErrorBox message={errorMessage} setMessage={setErrorMessage} />
+        
             <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>Register</Typography>
 
             <Stack spacing={2} alignItems="center" sx={{ mt: 2, flexWrap: "wrap" }}>
@@ -124,11 +129,13 @@ export default function RegisterSection() {
         }
 
         if (valid) {
-            await handleLogin(email, password)
-                .catch(error => {
-                    console.error('Login error:', error);;
-                });
-            navigate('/');
+            try {
+                await handleRegister(email, password);
+                navigate('/');
+            } catch (error) {
+                console.error('Registration error:', error);
+                setErrorMessage(error.message);
+            };
         }
     }
 }

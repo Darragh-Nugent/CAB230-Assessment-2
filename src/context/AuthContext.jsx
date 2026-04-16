@@ -1,12 +1,11 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-import {login, logout} from '../models/AuthModel.js';
+import { login, logout, register } from '../models/AuthModel.js';
 
 const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loginSnackBarOpen, setLoginSnackbarOpen] = useState(false);
-    const [logoutSnackBarOpen, setLogoutSnackbarOpen] = useState(false);
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -18,16 +17,29 @@ export default function AuthProvider({ children }) {
         try {
             await login(email, password);
             setIsAuthenticated(true);
-            setLoginSnackbarOpen(true);
+            setMessage('Login successful!');
         } catch (error) {
             console.error('Login error:', error);
+            throw error;
         }
     };
+
+    const handleRegister = async (email, password) => {
+        try {
+            await register(email, password);
+            setIsAuthenticated(true);
+            setMessage('Registration successful!');
+        } catch (error) {
+            console.error('Registration error:', error);
+            throw error;
+        }
+    };
+
 
     const handleLogout = () => {
         logout();
         setIsAuthenticated(false);
-        setLogoutSnackbarOpen(true);
+        setMessage('Logged out successfully!');
     };
 
     return (
@@ -35,10 +47,9 @@ export default function AuthProvider({ children }) {
             isAuthenticated,
             handleLogin,
             handleLogout,
-            loginSnackBarOpen,
-            setLoginSnackbarOpen,
-            logoutSnackBarOpen,
-            setLogoutSnackbarOpen
+            handleRegister,
+            message,
+            setMessage,
         }}>
             {children}
         </AuthContext.Provider>

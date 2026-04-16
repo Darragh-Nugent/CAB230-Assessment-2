@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
 import { useAuth } from '../context/AuthContext.jsx';
+import ErrorBox from './ErrorBox.jsx';
 
 export default function LoginSection() {
     const [email, setEmail] = useState('');
@@ -16,11 +17,15 @@ export default function LoginSection() {
     const [emailHelperText, setEmailHelperText] = useState('');
     const [passwordHelperText, setPasswordHelperText] = useState('');
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const navigate = useNavigate();
     const { handleLogin } = useAuth();
 
     return (
         <>
+            <ErrorBox message={errorMessage} setMessage={setErrorMessage} />
+
             <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>Login</Typography>
 
             <Stack spacing={2} alignItems="center" sx={{ mt: 2, flexWrap: "wrap" }}>
@@ -76,11 +81,13 @@ export default function LoginSection() {
         }
 
         if (valid) {
-            await handleLogin(email, password)
-                .catch(error => {
-                    console.error('Login error:', error);;
-                });
-            navigate('/');
+            try {
+                await handleLogin(email, password);
+                navigate('/');
+            } catch (error) {
+                console.error('Login error:', error);
+                setErrorMessage(error.message);
+            };
         }
     }
 }

@@ -29,7 +29,7 @@ const Hero = () => {
                 </Box>
                 <Box
                     sx={{
-                        width: { xs: "100%", md: "50%" }, // Ensure this Box takes 50% of the width
+                        width: { xs: "100%", md: "50%" },
                         padding: '3rem 0',
                         display: 'flex',
                         textAlign: 'left',
