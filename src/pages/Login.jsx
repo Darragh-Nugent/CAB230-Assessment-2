@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
+import { login } from '../models/AuthModel.js';
+
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    function validateInputs() {
+    async function validateInputs() {
         let valid = true;
 
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -38,7 +40,13 @@ export default function Login() {
         }
 
         if (valid) {
-            navigate('/', { state: { authenticated: true } });
+            login(email, password)
+                .then(() => {
+                    navigate('/');
+                })
+                .catch(error => {
+                    console.error('Login error:', error);
+                });
         }
     }
 

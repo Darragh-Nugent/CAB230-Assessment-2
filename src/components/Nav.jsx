@@ -37,7 +37,7 @@ export default function Nav({ authenticated }) {
                     My ratings
                   </Button>
                   <Button component={Link} to="/About" state={{ authenticated: authenticated }} color="inherit">
-                    My ratings
+                    Log out
                   </Button>
                 </>
               )
