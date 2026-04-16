@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent } from "@mui/material";
 import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';
