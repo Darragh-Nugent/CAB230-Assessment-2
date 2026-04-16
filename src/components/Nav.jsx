@@ -10,14 +10,14 @@ import HomeIcon from '@mui/icons-material/Home';
 
 
 // navigation links
-export default function Nav() {
+export default function Nav({ authenticated }) {
   return (
     <>
       <AppBar position="sticky" color="secondary">
         <Container>
           <Toolbar>
             <HomeIcon />
-            <Typography variant="h5" sx = {{flexGrow: 1}}>
+            <Typography variant="h5" sx={{ flexGrow: 1 }}>
               High Rise
             </Typography>
             <Button component={Link} to="/" color="inherit">
@@ -29,9 +29,24 @@ export default function Nav() {
             <Button component={Link} to="/Rentals" color="inherit">
               Property Search
             </Button>
-            <Button component={Link} to="/About" color="inherit">
-              My ratings
-            </Button>
+
+            {
+              authenticated ? (
+                <>
+                  <Button component={Link} to="/About" color="inherit">
+                    My ratings
+                  </Button>
+                  <Button component={Link} to="/About" color="inherit">
+                    My ratings
+                  </Button>
+                </>
+              )
+              :
+                <Button component={Link} to="/Login" color="inherit">
+                  Login or Sign Up
+                </Button>
+            }
+
           </Toolbar>
         </Container>
 

@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 import './App.css';
 
@@ -10,10 +11,17 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from './assets/theme';
 
 function AppLayout() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(token);
+  }, []);
+
   return (
-    
+
     <div className="App">
-      <Header />
+      <Header authenticated={isAuthenticated} />
       <Outlet />
       <Footer />
     </div>

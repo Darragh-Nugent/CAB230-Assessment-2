@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from 'react';
 
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent } from "@mui/material";
 import BedIcon from '@mui/icons-material/Bed';
