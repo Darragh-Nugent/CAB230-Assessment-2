@@ -1,31 +1,19 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 
 import './App.css';
 
 // components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AuthProvider from "./context/AuthContext.jsx";
+import { useAuth } from "./context/AuthContext.jsx";
 
 import { ThemeProvider, CssBaseline, Snackbar, IconButton } from '@mui/material';
 import theme from './assets/theme';
 
 function AppLayout() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loginSnackBarOpen, setLoginSnackbarOpen] = useState(false);
-  const [logoutSnackBarOpen, setLogoutSnackbarOpen] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true);
-      setLoginSnackbarOpen(true);
-    } else {
-      setIsAuthenticated(false);
-      setLogoutSnackbarOpen(true);
-    }
-
-  }, [isAuthenticated]);
+  const { loginSnackBarOpen, logoutSnackBarOpen, setLoginSnackbarOpen, setLogoutSnackbarOpen } = useAuth();
 
   return (
 
@@ -48,12 +36,10 @@ function AppLayout() {
         sx={{ backgroundColor: 'success.main', color: 'white' }}
 
       />
-
-      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-
+      <Header />
       <Outlet />
-
       <Footer />
+
     </div>
   );
 }
@@ -61,9 +47,13 @@ function AppLayout() {
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppLayout />
+      <AuthProvider>
+        <CssBaseline />
+        <AppLayout />
+      </AuthProvider>
+
     </ThemeProvider>
+
   );
 }
 

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
-import { login } from '../models/AuthModel.js';
+import { useAuth } from '../context/AuthContext.jsx';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -16,6 +16,7 @@ export default function Login() {
     const [passwordHelperText, setPasswordHelperText] = useState('');
 
     const navigate = useNavigate();
+    const { handleLogin } = useAuth();
 
     async function validateInputs() {
         let valid = true;
@@ -40,13 +41,11 @@ export default function Login() {
         }
 
         if (valid) {
-            login(email, password)
-                .then(() => {
-                    navigate('/');
-                })
+            await handleLogin(email, password)
                 .catch(error => {
-                    console.error('Login error:', error);
+                    console.error('Login error:', error);;
                 });
+            navigate('/');
         }
     }
 

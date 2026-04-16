@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useContext } from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,9 +8,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
 
-import { logout } from '../models/AuthModel.js';
+import { useAuth } from '../context/AuthContext.jsx';
 
-export default function Nav({ isAuthenticated, setIsAuthenticated }) {
+export default function Nav() {
+
+  const {isAuthenticated, handleLogout} = useAuth();
+
   return (
     <>
       <AppBar position="sticky" color="secondary">
@@ -36,14 +40,13 @@ export default function Nav({ isAuthenticated, setIsAuthenticated }) {
                     My ratings
                   </Button>
                   <Button component={Link} to="/" color="inherit" onClick={() => {
-                    logout();
-                    setIsAuthenticated(false);
+                    handleLogout();
                   }}>
                     Log out
                   </Button>
                 </>
               )
-              :
+                :
                 <Button component={Link} to="/Login" color="inherit">
                   Login or Sign Up
                 </Button>
