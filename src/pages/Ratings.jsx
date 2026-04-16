@@ -1,23 +1,35 @@
 import { Box, Rating, Typography, Grid, Card, CardContent, Container } from "@mui/material";
 import { useState, useEffect, createContext } from 'react';
 
+import { useInView } from "react-intersection-observer";
+
 import RentalCard from "../components/RentalCard";
 import { getRatings } from "../models/RatingModel";
 import { getProperty } from "../models/RentalModel";
 
 
 export default function Ratings() {
-    const [page, setPage] = useState({
-        page: 0,
-        pageSize: 20,
-    });
+    const [page, setPage] = useState( {page: 0,} );
     const [rentals, setRentals] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+
+    const { ref, inView } = useInView({
+        threshold: 0,
+    });
+
+    useEffect(() => {
+        if (inView && hasMore) {
+            setPage(prev => prev + 1);
+        }
+    }, [inView]);
+
 
     useEffect(() => {
         async function loadRatings() {
             const newRatings = await getRatings(page);
+
             const newProperties = await Promise.all(newRatings.data.map(async (rating) => {
-                let property = await getProperty(rating.rentalId);
+                const property = await getProperty(rating.rentalId);
                 return {
                     ...property,
                     rentalId: rating.rentalId,
@@ -26,7 +38,11 @@ export default function Ratings() {
                 };
             }))
 
-            setRentals(rentals => ([...rentals, ...newProperties]));
+            setRentals(prev => ([...prev, ...newProperties]));
+
+            if (newRatings.pagination.nextPage === null) {
+                setHasMore(false);
+            }
         }
 
         loadRatings();
@@ -34,7 +50,7 @@ export default function Ratings() {
 
     return (
         <Container maxWidth="xl">
-            <Grid container spacing={3} sx={{my: 3}}>
+            <Grid container spacing={3} sx={{ my: 3 }}>
                 {
                     rentals.map((curRental) => (
                         <Grid size={{ xs: 12, md: 6, lg: 4 }}>
@@ -43,7 +59,7 @@ export default function Ratings() {
                     ))
                 }
             </Grid>
-
+            <Box ref={ref}></Box>
         </Container>
 
     );
