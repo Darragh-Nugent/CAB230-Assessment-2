@@ -11,8 +11,9 @@ import MapPart from "../components/MapPart.jsx";
 export default function Property({ id }) {
     const property = useLoaderData();
 
-    let amenities = property.amenities != null ? property.amenities.split(',') : [];
+    const [rating, setRating] = useState(property.averageRating);
 
+    let amenities = property.amenities != null ? property.amenities.split(',') : [];
 
     return (
         <Container maxWidth="xl">
@@ -49,9 +50,9 @@ export default function Property({ id }) {
 
                             <Box sx={{ mt: 3 }}>
                                 <Rating
-                                    value={property.averageRating}
+                                    defaultValue={rating}
                                     precision={0.1}
-                                    readOnly
+                                    onChange={(newRating) => setRating(newRating)}
                                 />
                             </Box>
 
