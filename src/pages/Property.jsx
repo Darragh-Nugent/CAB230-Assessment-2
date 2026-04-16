@@ -7,8 +7,6 @@ import BathroomIcon from '@mui/icons-material/Bathroom';
 
 import MapPart from "../components/MapPart.jsx";
 import PropertyRating from "../components/PropertyRating.jsx";
-import { postRating } from "../models/RatingModel.js"
-
 
 export default function Property() {
     const {property, id} = useLoaderData();

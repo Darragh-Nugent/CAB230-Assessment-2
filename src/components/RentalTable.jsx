@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Box, Rating, Typography, Grid, Card, CardContent } from "@mui/material";
 import { DataGrid, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
 
+import PropertyRating from './PropertyRating.jsx';
 import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.jsx";
 import { useNavigate } from 'react-router-dom';
 
