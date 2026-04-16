@@ -20,6 +20,7 @@ export default function Ratings() {
                 let property = await getProperty(rating.rentalId);
                 return {
                     ...property,
+                    rentalId: rating.rentalId,
                     userRating: rating.rating,
                     dateTime: rating.dateTime,
                 };
