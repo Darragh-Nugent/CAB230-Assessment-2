@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
 import { useAuth } from '../context/AuthContext.jsx';
 
-export default function Login() {
+export default function LoginSection() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -17,6 +18,40 @@ export default function Login() {
 
     const navigate = useNavigate();
     const { handleLogin } = useAuth();
+
+    return (
+        <>
+            <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>Login</Typography>
+
+            <Stack spacing={2} alignItems="center" sx={{ mt: 2, flexWrap: "wrap" }}>
+                <TextField
+                    id="email"
+                    label="Email"
+                    error={emailError}
+                    helperText={emailHelperText}
+                    onChange={(e) => setEmail(e.target.value)}
+
+                />
+
+                <FormLabel>Password</FormLabel>
+                <TextField
+                    id="password"
+                    label="Password"
+                    type="password"
+                    error={passwordError}
+                    helperText={passwordHelperText}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </Stack>
+            <Button variant="contained" size='large' fullWidth onClick={validateInputs} sx={{ mt: 3, py: 1.5 }}>
+                Sign in
+            </Button>
+
+            <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
+                Don't have an account? <Button onClick={() => navigate('/Register')}>Sign up</Button>
+            </Typography>
+        </>
+    );
 
     async function validateInputs() {
         let valid = true;
@@ -48,43 +83,5 @@ export default function Login() {
             navigate('/');
         }
     }
-
-    return (
-        <Container maxWidth="xl">
-            <Card sx={{ height: "100%", bgcolor: 'custom.card', borderRadius: 3 }}>
-                <CardContent>
-                    <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>Login</Typography>
-
-                    <FormControl>
-                        <FormLabel>Email</FormLabel>
-                        <TextField
-                            id="email"
-                            label="Email"
-                            error={emailError}
-                            helperText={emailHelperText}
-                            onChange={(e) => setEmail(e.target.value)}
-
-                        />
-                    </FormControl>
-
-                    <FormControl>
-                        <FormLabel>Password</FormLabel>
-                        <TextField
-                            id="password"
-                            label="Password"
-                            type="password"
-                            error={passwordError}
-                            helperText={passwordHelperText}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </FormControl>
-
-                    <Button variant="contained" color="primary" onClick={validateInputs}>
-                        Sign in
-                    </Button>
-                </CardContent>
-            </Card>
-        </Container>
-    );
 }
 

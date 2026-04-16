@@ -13,7 +13,7 @@ import Menu from './pages/Menu.jsx';
 import Rentals from './pages/Rentals.jsx';
 import About from './pages/About.jsx';
 import Property from './pages/Property.jsx';
-import Login from './pages/Login.jsx';
+import Auth from './pages/Auth.jsx';
 
 
 const router = createBrowserRouter([
@@ -32,7 +32,8 @@ const router = createBrowserRouter([
         },
         Component: Property,
       },
-      { path: "login", Component: Login },
+      { path: "login", Component: Auth },
+      { path: "register", Component: Auth },
       { path: "about", Component: About },
     ],
   },

@@ -1,0 +1,28 @@
+import { useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
+
+import LoginSection from '../components/LoginSection.jsx';
+import RegisterSection from '../components/RegisterSection.jsx';
+
+export default function Auth() {
+    const location = useLocation();
+
+    return (
+        <Container maxWidth="md" align="center" sx={{ mt: 5 }}>
+            <Card sx={{ height: "100%", bgcolor: 'custom.card', borderRadius: 3 }}>
+                <CardContent>
+                    <Grid container spacing={2}>
+                        <Grid size={{ xs: 12, md: 7 }}>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 5 }}>
+                            {location.pathname === '/Login' ? <LoginSection /> : <RegisterSection />}
+                        </Grid>
+                    </Grid>
+                </CardContent>
+            </Card>
+        </Container>
+    );
+}
+
