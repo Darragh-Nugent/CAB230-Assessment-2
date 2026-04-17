@@ -22,10 +22,8 @@ export default function RangeSearchOption(props) {
 
 
     return (
-        <Stack direction="row" spacing={2} alignItems="center">
-            <Box sx={{ width: 180 }}>
+        <Stack direction="row" spacing={2} >
                 <Typography>{label}</Typography>
-            </Box>
 
             <TextField
                 size="small"

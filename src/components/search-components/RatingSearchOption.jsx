@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Box, Stack, Typography, TextField, Rating } from "@mui/material";
+import { Box, Grid, Stack, Typography, TextField, Rating } from "@mui/material";
 
 
 export default function RatingSearchOption(props) {
@@ -28,26 +28,31 @@ export default function RatingSearchOption(props) {
     }, [cleared]);
 
     return (
-        <Stack direction="row" spacing={2} alignItems="center">
-            <Box sx={{ width: 180 }}>
-                <Typography>{min}</Typography>
-            </Box>
+        <Grid container spacing={2}>
+            <Grid size={{ xs: 12, sm: 6 }}>
+                <Stack direction="row" spacing={2}>
+                    <Typography>{min}</Typography>
 
-            <Rating
-                value={minValue}
-                precision={0.1}
-                onChange={(event, newRating) => setMinValue(newRating)}
-            />
+                    <Rating
+                        value={minValue}
+                        precision={0.1}
+                        onChange={(event, newRating) => setMinValue(newRating)}
+                    />
+                </Stack>
+            </Grid>
 
-            <Box sx={{ width: 180 }}>
-                <Typography>{max}</Typography>
-            </Box>
+            <Grid size={{ xs: 12, sm: 6 }}>
+                <Stack direction="row" spacing={2}>
+                    <Typography>{max}</Typography>
 
-            <Rating
-                value={maxValue}
-                precision={0.1}
-                onChange={(event, newRating) => setMaxValue(newRating)}
-            />
-        </Stack>
+                    <Rating
+                        value={maxValue}
+                        precision={0.1}
+                        onChange={(event, newRating) => setMaxValue(newRating)}
+                    />
+                </Stack>
+
+            </Grid>
+        </Grid>
     );
 }

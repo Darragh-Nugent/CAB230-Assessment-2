@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Card } from "@mui/material";
 
 import RentalTable from "../components/RentalTable.jsx";
 import AGRentalTable from "../components/AGRentalTable.jsx";
@@ -64,11 +64,16 @@ export default function Rentals() {
           />
         </Box>
 
-        <AGRentalTable
-          filterModel={filterModel}
-          setFilterModel={setFilterModel}
-        />
-
+        <Card sx={{
+          borderRadius: 3,
+          boxShadow: 3,
+          bgcolor: 'custom.card',
+        }}>
+          <AGRentalTable
+            filterModel={filterModel}
+            setFilterModel={setFilterModel}
+          />
+        </Card>
       </Container>
     </Box>
   );

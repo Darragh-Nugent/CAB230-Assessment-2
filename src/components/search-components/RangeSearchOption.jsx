@@ -28,31 +28,26 @@ export default function RangeSearchOption(props) {
     }, [cleared]);
 
     return (
-        <Stack direction="row" spacing={2} alignItems="center">
-            <Box sx={{ width: 180 }}>
+        <Stack direction="row" spacing={4}>
+            <Stack spacing={1}>
                 <Typography>{min}</Typography>
-            </Box>
+                <TextField
+                    size="small"
+                    label="Minimum value"
+                    value={minValue}
+                    onChange={(e) => setMinValue(e.target.value)}
+                />
+            </Stack>
 
-            <TextField
-                size="small"
-                label="Minimum value"
-                min={0}
-                value={minValue}
-                onChange={(e) => setMinValue(e.target.value)}
-            />
-
-            <Box sx={{ width: 180 }}>
+            <Stack spacing={1}>
                 <Typography>{max}</Typography>
-            </Box>
-
-            <TextField
-                size="small"
-                label="Maximum value"
-                min={0}
-                value={maxValue}
-                onChange={(e) => setMaxValue(e.target.value)}
-            />
-
+                <TextField
+                    size="small"
+                    label="Maximum value"
+                    value={maxValue}
+                    onChange={(e) => setMaxValue(e.target.value)}
+                />
+            </Stack>
         </Stack>
     );
 }

@@ -146,51 +146,43 @@ export default function RentalTable({ filterModel, setFilterModel }) {
 
     return (
         <>
-            <Container maxWidth="xl" >
-                <Card sx={{
-                    borderRadius: 3,
-                    boxShadow: 3,
-                    bgcolor: 'custom.card',
-                }}>
-                    <Box sx={{
-                        height: 650,
-                        width: '100%',
 
-                        "& .ag-header": {
-                            backgroundColor: "custom.backgroundLight",
-                        },
+            <Box sx={{
+                height: 650,
+                width: '100%',
 
-                        "& .ag-row:hover": {
-                            backgroundColor: "custom.backgroundDark",
-                        },
+                "& .ag-header": {
+                    backgroundColor: "custom.backgroundLight",
+                },
 
-                        "& .ag-cell": {
-                            display: "flex",
-                            alignItems: "center",
-                        },
-                    }}
+                "& .ag-row:hover": {
+                    backgroundColor: "custom.backgroundDark",
+                },
+
+                "& .ag-cell": {
+                    display: "flex",
+                    alignItems: "center",
+                },
+            }}
+            >
+                <AgGridProvider modules={modules}>
+                    <AgGridReact
+                        theme={theme}
+                        defaultColDef={defaultColDef}
+                        columnDefs={columnDefs}
+                        rowBuffer={0}
+                        rowModelType={'infinite'}
+                        cacheBlockSize={10}
+                        cacheOverflowSize={2}
+                        maxConcurrentDatasourceRequests={1}
+                        infiniteInitialRowCount={20}
+                        maxBlocksInCache={10}
+                        onGridReady={onGridReady}
+                        onRowClicked={(event) => navigate(`/rentals/${event.data.id}`)}
                     >
-                        <AgGridProvider modules={modules}>
-                            <AgGridReact
-                                theme={theme}
-                                defaultColDef={defaultColDef}
-                                columnDefs={columnDefs}
-                                rowBuffer={0}
-                                rowModelType={'infinite'}
-                                cacheBlockSize={10}
-                                cacheOverflowSize={2}
-                                maxConcurrentDatasourceRequests={1}
-                                infiniteInitialRowCount={20}
-                                maxBlocksInCache={10}
-                                onGridReady={onGridReady}
-                                onRowClicked={(event) => navigate(`/rentals/${event.data.id}`)}
-                            >
-                            </AgGridReact>
-                        </AgGridProvider>
-                    </Box>
-                </Card>
-            </Container>
-
+                    </AgGridReact>
+                </AgGridProvider>
+            </Box>
         </>
     );
 }
