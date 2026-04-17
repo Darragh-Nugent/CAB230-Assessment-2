@@ -55,7 +55,7 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                         <ValueSearchOption label="Suburb" field="suburb" cleared={cleared} setFilterModel={setFilterModel} />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <ValueSearchOption label="Postcode" field="postcode" cleared={cleared} setFilterModel={setFilterModel} />
+                        <ValueSearchOption label="Postcode" field="postcode" cleared={cleared} number={true} setFilterModel={setFilterModel} />
                     </Grid>
 
                     <Grid size={{ xs: 12 }}>
