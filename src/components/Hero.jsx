@@ -1,8 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
 import { Typography, Box, Stack, Button, Container } from '@mui/material'
+
 import SadGuy from '../assets/sad_guy2.jpg'
 
 const Hero = () => {
+    const navigate = useNavigate();
+
     return (
         <Container id="home" maxWidth={false} disableGutters>
             <Stack
@@ -13,7 +18,6 @@ const Hero = () => {
                     justifyContent: 'center'
                 }}
             >
-
                 <Box
                     sx={{
                         width: "50%",
@@ -22,9 +26,9 @@ const Hero = () => {
                 >
                     <img src={SadGuy} alt="sad fella"
                         style={{
-                             width: '100%',
-                             display: 'block'
-                            }}
+                            width: '100%',
+                            display: 'block'
+                        }}
                     />
                 </Box>
                 <Box
@@ -54,7 +58,13 @@ const Hero = () => {
                             The perfect place for all your incredibly high priced needs.
                         </Typography>
                         <Box>
-                            <Button variant="contained" color='secondary' href="#coffee">Order Now</Button>
+                            <Button
+                                variant="contained"
+                                color='secondary'
+                                onClick={(event) => navigate(`/rentals/`)}
+                            >
+                                Browse Rentals
+                            </Button>
                         </Box>
                     </Stack>
                 </Box>

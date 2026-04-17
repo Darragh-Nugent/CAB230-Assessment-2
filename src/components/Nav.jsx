@@ -6,8 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import HomeIcon from '@mui/icons-material/Home';
-
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 import { useAuth } from '../context/AuthContext.jsx';
 
 export default function Nav() {
@@ -19,8 +18,8 @@ export default function Nav() {
       <AppBar position="sticky" color="secondary">
         <Container>
           <Toolbar>
-            <HomeIcon />
-            <Typography variant="h5" sx={{ flexGrow: 1 }}>
+            <LocationCityIcon sx={{fontSize:40}} />
+            <Typography variant="h4" sx={{ flexGrow: 1, ml: 2 }}>
               High Rise
             </Typography>
             <Button component={Link} to="/" color="inherit">

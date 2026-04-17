@@ -11,10 +11,7 @@ export default function Footer() {
       p: "1em"
     }}>
       <Typography variant="body1" sx={{ mb: 1 }}>
-        High Rise
-      </Typography>
-      <Typography variant="body1">
-        Copyright &copy; 2026{" "}
+        High Rise Copyright &copy; 2026{" "}
       </Typography>
     </Box>
   );

@@ -1,22 +1,49 @@
 import React from "react";
-import { Box, Typography, Grid, Card, CardContent } from "@mui/material";
 
+import { Box, Typography, Grid, Card, CardContent } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import BalanceIcon from '@mui/icons-material/Balance';
+import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 
 const featuresData = [
     {
-        heading: "Organic & Ethical",
-        text: "All of our ingredients are organically sourced from local producers.",
-        img: { src: "img/like.png", alt: "Thumbs up icon" }
+        heading: "Ethical Business",
+        text: "All of our rentals are priced gauged using the most ethical methods.",
+        img: function () {
+            return (<BalanceIcon
+                sx={{
+                    color: "gold",
+                    fontSize: 50
+                }}
+            />
+            )
+        }
     },
     {
-        heading: "Live Entertainment",
-        text: "On the first Saturday of every month, enjoy free live jazz entertainment from local bands.",
-        img: { src: "img/faces.png", alt: "Entertainment icon" }
+        heading: "From tip to Tasmania",
+        text: "Explore properties from locations you have never seen before and places you never want to see again.",
+        img: function () {
+            return (<AirlineStopsIcon
+                sx={{
+                    color: "white",
+                    fontSize: 50
+                }}
+            />
+            )
+        }
     },
     {
         heading: "Satisfaction guaranteed",
-        text: "Not happy with your meal? A full refund will be provided, no questions asked!",
-        img: { src: "img/heart.png", alt: "Heart icon" }
+        text: "Not happy with your property? we'd be happy to point to the place in your contract that says we don't need to do doodly squat about it!",
+        img: function () {
+            return (<FavoriteIcon
+                sx={{
+                    color: "red",
+                    fontSize: 50
+                }}
+            />
+            )
+        }
     }
 ];
 
@@ -33,9 +60,13 @@ export default function Features() {
 
             <Grid container spacing={2}>
                 {featuresData.map((feature, index) => (
-                    <Grid item key={index}>
+                    <Grid size={{ xs: 12, md: 4 }} key={index}>
                         <Card
                             sx={{
+                                height: 200,
+                                alignItems: 'center',
+
+                                display: 'flex',
                                 textAlign: "center",
                                 p: 2,
                                 backgroundColor: "secondary.dark",
@@ -47,16 +78,7 @@ export default function Features() {
                             }}
                         >
                             <CardContent>
-                                <Box
-                                    component="img"
-                                    src={feature.img.src}
-                                    alt={feature.img.alt}
-                                    sx={{
-                                        width: 60,
-                                        height: 60,
-                                        mb: 2,
-                                    }}
-                                />
+                                {feature.img()}
 
                                 <Typography variant="h5" sx={{ mb: 1 }}>
                                     {feature.heading}
