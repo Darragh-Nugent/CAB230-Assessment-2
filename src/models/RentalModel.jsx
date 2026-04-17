@@ -68,13 +68,15 @@ export async function searchRentals(page, sortModel, filterModel) {
                     fieldMin = "minimumRating";
                     fieldMax = "maximumRating";
                     break;
-                
+
                 case "propertyTypes":
                     if (value && Array.isArray(value) && value.length > 0) {
-                        params.append(field, value);
+                        value.map((propertyType) => {
+                            params.append(field, propertyType);
+                        })
                     }
-                return;
-                break;
+                    return;
+                    break;
 
                 default:
                     if (field && value) {

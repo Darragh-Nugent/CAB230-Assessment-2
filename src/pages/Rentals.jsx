@@ -5,7 +5,7 @@ import { Box, Container, Typography } from "@mui/material";
 
 import RentalTable from "../components/RentalTable.jsx";
 import AGRentalTable from "../components/AGRentalTable.jsx";
-import AdvancedSearchBox from "../components/AdvancedSearchBox";
+import AdvancedSearchBox from "../components/search-components/AdvancedSearchBox.jsx"
 import { getStates, getPropertyTypes } from "../models/RentalModel.jsx"
 
 export default function Rentals() {
