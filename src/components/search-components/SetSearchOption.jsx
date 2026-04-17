@@ -31,7 +31,9 @@ export default function SetSearchOption(props) {
                 multiple={ selectionType === 'multiple' ? true : false }
                 onChange={(e) => setSelected(e.target.value)}
             >
-                <MenuItem value=""></MenuItem>
+                {
+                    selectionType === 'multiple' ? null : <MenuItem value=""><em>None</em></MenuItem>
+                }
                 {
                     set.map((value) => (
                         <MenuItem value={value}>{value}</MenuItem>
