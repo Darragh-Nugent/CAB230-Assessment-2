@@ -8,6 +8,7 @@ import { propValidatorsDataGrid } from '@mui/x-data-grid/internals';
 import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalModel.jsx";
 import RangeSearchOption from "./RangeSearchOption.jsx";
 import SetSearchOption from "./SetSearchOption.jsx";
+import ValueSearchOption from "./ValueSearchOption.jsx";
 
 export default function AdvancedSearchBox({ filterModel, setFilterModel, states, propertyTypes }) {
 
@@ -36,6 +37,7 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                     p: 3,
                 }}>
                 <Stack spacing={2} sx={{ flexGrow: 2 }}>
+                    <ValueSearchOption label="Suburb" field="suburb" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum rent" max="Maximum rent" field="rent" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum Bathrooms" max="Maximum Bathrooms" field="bathrooms" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum Bedrooms" max="Maximum Bedrooms" field="bedrooms" setFilterModel={setFilterModel} />
