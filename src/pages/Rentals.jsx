@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Box, Container, Typography } from "@mui/material";
 
 import RentalTable from "../components/RentalTable.jsx";
+import AGRentalTable from "../components/AGRentalTable.jsx";
 import AdvancedSearchBox from "../components/AdvancedSearchBox";
 
 export default function Rentals() {
@@ -39,6 +40,8 @@ export default function Rentals() {
           advancedFilterModel={advancedFilterModel}
           setAdvancedFilterModel={setAdvancedFilterModel}
         />
+
+        <AGRentalTable />
 
       </Container>
     </Box>

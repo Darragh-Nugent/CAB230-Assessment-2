@@ -27,84 +27,146 @@ export function getProperty(id) {
         .then((res) => res.json());
 }
 
-export async function searchRentals(paginationModel, sortModel, tableFilterModel, advancedFilterModel) {
-    const params = new URLSearchParams();
 
-    params.append("page", paginationModel.page + 1);
+export async function searchRentals(page, sortModel, tableFilterModel) {
+    const params = new URLSearchParams();
+    params.append("page", page)
+
 
     if (sortModel.length > 0) {
-        params.append("sortBy", sortModel[0].field);
+        params.append("sortBy", sortModel[0].colId);
         params.append("sortOrder", sortModel[0].sort);
     }
 
     tableFilterModel.items.forEach(filterItem => {
-        let field;
-        switch (filterItem.field) {
-            case "suburb":
-                field = "suburb";
-                break;
-
-            case "state":
-                field = "state";
-                break;
-
-            case "postcode":
-                field = "postcode";
-                break;
-
-            default:
-                break;
-        }
-
-        if (field && filterItem.value) {
+        if (filterItem && filterItem.filter) {
             params.append(field, filterItem.value);
         }
     });
 
-    Object.entries(advancedFilterModel).forEach(([field, values]) => {
-        let fieldMin;
-        let fieldMax;
+    // Object.entries(advancedFilterModel).forEach(([field, values]) => {
+    //     let fieldMin;
+    //     let fieldMax;
 
-        switch (field) {
-            case "rent":
-                fieldMin = "minimumRent";
-                fieldMax = "maximumRent";
-                break;
+    //     switch (field) {
+    //         case "rent":
+    //             fieldMin = "minimumRent";
+    //             fieldMax = "maximumRent";
+    //             break;
 
-            case "bathrooms":
-                fieldMin = "minimumBathrooms";
-                fieldMax = "maximumBathrooms";
-                break;
+    //         case "bathrooms":
+    //             fieldMin = "minimumBathrooms";
+    //             fieldMax = "maximumBathrooms";
+    //             break;
 
-            case "bedrooms":
-                fieldMin = "minimumBedrooms";
-                fieldMax = "maximumBedrooms";
-                break;
+    //         case "bedrooms":
+    //             fieldMin = "minimumBedrooms";
+    //             fieldMax = "maximumBedrooms";
+    //             break;
 
-            case "parkingSpaces":
-                fieldMin = "minimumParking";
-                fieldMax = "maximumParking";
-                break;
+    //         case "parkingSpaces":
+    //             fieldMin = "minimumParking";
+    //             fieldMax = "maximumParking";
+    //             break;
 
-            case "averageRating":
-                fieldMin = "minimumRating";
-                fieldMax = "maximumRating";
-                break;
+    //         case "averageRating":
+    //             fieldMin = "minimumRating";
+    //             fieldMax = "maximumRating";
+    //             break;
 
-            default:
-                break;
+    //         default:
+    //             break;
+    //     }
+
+
+        const response = await fetch(`${path}search?${params.toString()}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        if (values.min !== '') params.append(fieldMin, values.min);
-        if (values.max !== '') params.append(fieldMax, values.max);
-    });
-
-    const response = await fetch(`${path}search?${params.toString()}`);
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        return data;
     }
 
-    const data = await response.json();
-    return data;
-}
+// export async function searchRentals(paginationModel, sortModel, tableFilterModel, advancedFilterModel) {
+//     const params = new URLSearchParams();
+
+//     params.append("page", paginationModel.page + 1);
+
+//     if (sortModel.length > 0) {
+//         params.append("sortBy", sortModel[0].field);
+//         params.append("sortOrder", sortModel[0].sort);
+//     }
+
+//     tableFilterModel.items.forEach(filterItem => {
+//         let field;
+//         switch (filterItem.field) {
+//             case "suburb":
+//                 field = "suburb";
+//                 break;
+
+//             case "state":
+//                 field = "state";
+//                 break;
+
+//             case "postcode":
+//                 field = "postcode";
+//                 break;
+
+//             default:
+//                 break;
+//         }
+
+//         if (field && filterItem.value) {
+//             params.append(field, filterItem.value);
+//         }
+//     });
+
+//     Object.entries(advancedFilterModel).forEach(([field, values]) => {
+//         let fieldMin;
+//         let fieldMax;
+
+//         switch (field) {
+//             case "rent":
+//                 fieldMin = "minimumRent";
+//                 fieldMax = "maximumRent";
+//                 break;
+
+//             case "bathrooms":
+//                 fieldMin = "minimumBathrooms";
+//                 fieldMax = "maximumBathrooms";
+//                 break;
+
+//             case "bedrooms":
+//                 fieldMin = "minimumBedrooms";
+//                 fieldMax = "maximumBedrooms";
+//                 break;
+
+//             case "parkingSpaces":
+//                 fieldMin = "minimumParking";
+//                 fieldMax = "maximumParking";
+//                 break;
+
+//             case "averageRating":
+//                 fieldMin = "minimumRating";
+//                 fieldMax = "maximumRating";
+//                 break;
+
+//             default:
+//                 break;
+//         }
+
+//         if (values.min !== '') params.append(fieldMin, values.min);
+//         if (values.max !== '') params.append(fieldMax, values.max);
+//     });
+
+//     const response = await fetch(`${path}search?${params.toString()}`);
+
+//     if (!response.ok) {
+//         throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     return data;
+// }
