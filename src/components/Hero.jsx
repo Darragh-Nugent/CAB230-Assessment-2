@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Typography, Box, Stack, Button, Container } from '@mui/material'
 
-import SadGuy from '../assets/sad_guy2.jpg'
+import HeroImage from '../assets/login-house.jpg'
 
 const Hero = () => {
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Hero = () => {
                         margin: 0
                     }}
                 >
-                    <img src={SadGuy} alt="sad fella"
+                    <img src={HeroImage} alt="sad fella"
                         style={{
                             width: '100%',
                             display: 'block'
