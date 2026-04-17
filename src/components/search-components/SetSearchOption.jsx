@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Box, Stack, Typography, Select, MenuItem } from "@mui/material";
 
 export default function SetSearchOption(props) {
-    let { set, label, field, setFilterModel, selectionType = "single" } = props
+    let { set, label, field, cleared, setFilterModel, selectionType = "single" } = props
 
     const [selected, setSelected] = selectionType === 'multiple' ? useState([]) : useState(null);
 
@@ -14,6 +14,10 @@ export default function SetSearchOption(props) {
             [field]: selected,
         }))
     }, [selected]);
+
+        useEffect(() => {
+            setSelected(selectionType === 'multiple' ? [] : null);
+        }, [cleared]);
 
 
     return (

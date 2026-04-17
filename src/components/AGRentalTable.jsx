@@ -1,8 +1,11 @@
 import { useState, useEffect, useCallback, useMemo, useRef, } from 'react';
 
-import { Box, Rating, Typography, Grid, Card, CardContent } from "@mui/material";
+import { Box, Rating, Typography, Grid, Card, CardContent, Container } from "@mui/material";
+import BedIcon from '@mui/icons-material/Bed';
+import GarageIcon from '@mui/icons-material/Garage';
+import BathroomIcon from '@mui/icons-material/Bathroom';
 
-import { AllCommunityModule } from 'ag-grid-community';
+import { AllCommunityModule, themeAlpine, themeMaterial } from 'ag-grid-community';
 import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 
 import PropertyRating from './PropertyRating.jsx';
@@ -21,16 +24,15 @@ export default function RentalTable({ filterModel, setFilterModel }) {
     const navigate = useNavigate();
 
     const modules = [AllCommunityModule];
+    const theme = themeAlpine;
 
     const gridApiRef = useRef(null);
 
     const defaultColDef = useMemo(() => {
         return {
-            filter: true,
-            floatingFilter: true,
-            filterParams: {
-                maxNumConditions: 1,
-            },
+            filter: false,
+            floatingFilter: false,
+            sortable: true
         };
     }, []);
 
@@ -42,32 +44,28 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         {
             field: 'title',
             headerName: 'Title',
-            width: 500,
+            width: 400,
             filter: false,
         },
         {
             field: 'rent',
             headerName: 'Rent',
             width: 80,
-            filter: "agNumberColumnFilter",
-            filterParams: {
-                maxNumConditions: 1,
-                filterOptions: ["inRange", "greaterThan", "lessThan"]
+            cellStyle: {
+                fontWeight: 600,
+                color: '#40231b', // primary.main
             },
+            valueFormatter: (params) => `$${params.value}`,
         },
         {
             field: 'propertyType',
             headerName: 'Property Type',
-            width: 150,
-            filter: false
+            width: 175
         },
         {
             field: 'postcode',
             headerName: 'Postcode',
-            width: 80,
-            filterParams: {
-                filterOptions: ["equals"],
-            }
+            width: 95,
         },
         {
             field: 'state',
@@ -78,23 +76,27 @@ export default function RentalTable({ filterModel, setFilterModel }) {
             field: 'suburb',
             headerName: 'Suburb',
             width: 150,
-            filterParams: {
-                filterOptions: ["equals"],
-            }
         },
         {
             field: 'bathrooms',
-            headerName: '# Bathrooms',
-            width: 100,
+            headerComponentParams: {
+                innerHeaderComponent: BathroomIcon
+            },
+            width: 80,
         },
         {
             field: 'bedrooms',
-            headerName: '# Bedrooms',
-            width: 100,
+            headerComponentParams: {
+                innerHeaderComponent: BedIcon
+            },
+            sortable: true,
+            width: 80,
         },
         {
             field: 'parkingSpaces',
-            headerName: '# Parks',
+            headerComponentParams: {
+                innerHeaderComponent: GarageIcon
+            },
             width: 80,
         },
         {
@@ -144,24 +146,51 @@ export default function RentalTable({ filterModel, setFilterModel }) {
 
     return (
         <>
-            <Box sx={{ height: 650, width: '100%' }}>
-                <AgGridProvider modules={modules}>
-                    <AgGridReact
-                        defaultColDef={defaultColDef}
-                        columnDefs={columnDefs}
-                        rowBuffer={0}
-                        rowModelType={'infinite'}
-                        cacheBlockSize={10}
-                        cacheOverflowSize={2}
-                        maxConcurrentDatasourceRequests={1}
-                        infiniteInitialRowCount={20}
-                        maxBlocksInCache={10}
-                        onGridReady={onGridReady}
-                    >
+            <Container maxWidth="xl" >
+                <Card sx={{
+                    borderRadius: 3,
+                    boxShadow: 3,
+                    bgcolor: 'custom.card',
+                }}>
+                    <Box sx={{
+                        height: 650,
+                        width: '100%',
 
-                    </AgGridReact>
-                </AgGridProvider>
-            </Box>
+                        "& .ag-header": {
+                            backgroundColor: "custom.backgroundLight",
+                        },
+
+                        "& .ag-row:hover": {
+                            backgroundColor: "custom.backgroundDark",
+                        },
+
+                        "& .ag-cell": {
+                            display: "flex",
+                            alignItems: "center",
+                        },
+                    }}
+                    >
+                        <AgGridProvider modules={modules}>
+                            <AgGridReact
+                                theme={theme}
+                                defaultColDef={defaultColDef}
+                                columnDefs={columnDefs}
+                                rowBuffer={0}
+                                rowModelType={'infinite'}
+                                cacheBlockSize={10}
+                                cacheOverflowSize={2}
+                                maxConcurrentDatasourceRequests={1}
+                                infiniteInitialRowCount={20}
+                                maxBlocksInCache={10}
+                                onGridReady={onGridReady}
+                                onRowClicked={(event) => navigate(`/rentals/${event.data.id}`)}
+                            >
+                            </AgGridReact>
+                        </AgGridProvider>
+                    </Box>
+                </Card>
+            </Container>
+
         </>
     );
 }

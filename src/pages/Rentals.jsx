@@ -44,9 +44,16 @@ export default function Rentals() {
 
       <Container maxWidth="xl">
 
-        <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
-          Rental Listings
-        </Typography>
+        <Box sx={{ mb: 3 }}>
+
+          <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
+            Rental Listings
+          </Typography>
+
+          <Typography variant="body1" color="text.secondary">
+            Search and filter properties across Australia
+          </Typography>
+        </Box>
 
         <Box sx={{ mb: 3 }}>
           <AdvancedSearchBox
@@ -57,9 +64,9 @@ export default function Rentals() {
           />
         </Box>
 
-        <AGRentalTable 
-        filterModel={filterModel} 
-        setFilterModel={setFilterModel}
+        <AGRentalTable
+          filterModel={filterModel}
+          setFilterModel={setFilterModel}
         />
 
       </Container>

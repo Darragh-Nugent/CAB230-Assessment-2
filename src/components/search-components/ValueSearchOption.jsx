@@ -4,7 +4,7 @@ import { Box, Stack, Typography, TextField } from "@mui/material";
 
 
 export default function RangeSearchOption(props) {
-    let { label, field, setFilterModel } = props;
+    let { label, field, cleared, setFilterModel } = props;
 
     const [value, setValue] = useState('');
 
@@ -15,6 +15,10 @@ export default function RangeSearchOption(props) {
             [field]: value,
         }))
     }, [value]);
+
+    useEffect(() => {
+        setValue('');
+    }, [cleared]);
 
 
     return (

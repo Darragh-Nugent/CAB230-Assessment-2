@@ -12,6 +12,7 @@ import ValueSearchOption from "./ValueSearchOption.jsx";
 import RatingSearchOption from './RatingSearchOption.jsx';
 
 export default function AdvancedSearchBox({ filterModel, setFilterModel, states, propertyTypes }) {
+    const [cleared, setCleared] = useState(false);
 
     return (
         <Accordion
@@ -19,7 +20,6 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                 bgcolor: 'background.paper',
                 borderRadius: 2,
                 boxShadow: 3,
-                '&:before': { display: 'none' } // remove default divider line
             }}
         >
             <AccordionSummary
@@ -38,20 +38,46 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                     p: 3,
                 }}>
                 <Stack spacing={2} sx={{ flexGrow: 2 }}>
-                    <ValueSearchOption label="Suburb" field="suburb" setFilterModel={setFilterModel} />
-                    <ValueSearchOption label="Postcode" field="postcode" setFilterModel={setFilterModel} />
-                    
-                    <SetSearchOption set={states} label="State" field="state" setFilterModel={setFilterModel} />
+                    <Typography variant="subtitle2" sx={{ mt: 1 }}>
+                        Location
+                    </Typography>
 
-                    <RangeSearchOption min="Minimum rent" max="Maximum rent" field="rent" setFilterModel={setFilterModel} />
-                    <RangeSearchOption min="Minimum Bathrooms" max="Maximum Bathrooms" field="bathrooms" setFilterModel={setFilterModel} />
-                    <RangeSearchOption min="Minimum Bedrooms" max="Maximum Bedrooms" field="bedrooms" setFilterModel={setFilterModel} />
-                    <RangeSearchOption min="Minimum Parking" max="Maximum Parking" field="parkingSpaces" setFilterModel={setFilterModel} />
+                    <ValueSearchOption label="Suburb" field="suburb" cleared={cleared} setFilterModel={setFilterModel} />
+                    <ValueSearchOption label="Postcode" field="postcode" cleared={cleared} setFilterModel={setFilterModel} />
+                    <SetSearchOption set={states} label="State" field="state" cleared={cleared} setFilterModel={setFilterModel} />
 
-                    <RatingSearchOption min="Minimum Rating" max="Maximum Rating" field="averageRating" setFilterModel={setFilterModel} />
+                    <Typography variant="subtitle2" sx={{ mt: 2 }}>
+                        Property Details
+                    </Typography>
 
-                    <SetSearchOption set={propertyTypes} label="Property Type" field="propertyTypes" selectionType="multiple" setFilterModel={setFilterModel} />
+                    <SetSearchOption set={propertyTypes} label="Property Type" field="propertyTypes" selectionType="multiple"  cleared={cleared} setFilterModel={setFilterModel} />
+                    <RatingSearchOption min="Minimum Rating" max="Maximum Rating" field="averageRating" cleared={cleared} setFilterModel={setFilterModel} />
 
+                    <RangeSearchOption min="Minimum rent" max="Maximum rent" field="rent" cleared={cleared} setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum Bathrooms" max="Maximum Bathrooms" field="bathrooms" cleared={cleared} setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum Bedrooms" max="Maximum Bedrooms" field="bedrooms" cleared={cleared} setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum Parking" max="Maximum Parking" field="parkingSpaces" cleared={cleared} setFilterModel={setFilterModel} />
+
+                    <Button
+                        variant="contained"
+                        color='primary'
+                        onClick={() => {
+                            setFilterModel({
+                                suburb: '',
+                                state: '',
+                                postcode: '',
+                                rent: { min: '', max: '' },
+                                bathrooms: { min: '', max: '' },
+                                bedrooms: { min: '', max: '' },
+                                parkingSpaces: { min: '', max: '' },
+                                averageRating: { min: '', max: '' },
+                                propertyTypes: [],
+                            })
+                            setCleared(!cleared);
+                        }}
+                    >
+                        Clear Filters
+                    </Button>
                 </Stack>
             </AccordionDetails>
         </Accordion>

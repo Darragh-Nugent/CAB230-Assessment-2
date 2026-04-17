@@ -12,6 +12,7 @@ const theme = createTheme({
     },
     custom: {
       backgroundLight: '#f7f5f3',
+      backgroundDark: '#fafafa',
       card: '#ffffff',
       border: '#e0e0e0',
     },

@@ -4,7 +4,7 @@ import { Box, Stack, Typography, TextField, Rating } from "@mui/material";
 
 
 export default function RatingSearchOption(props) {
-    let { min, max, field, setFilterModel } = props;
+    let { min, max, field, cleared, setFilterModel } = props;
 
     const [minValue, setMinValue] = useState('');
     const [maxValue, setMaxValue] = useState('');
@@ -22,6 +22,10 @@ export default function RatingSearchOption(props) {
     },
         [minValue, maxValue]);
 
+    useEffect(() => {
+        setMinValue('');
+        setMaxValue('');
+    }, [cleared]);
 
     return (
         <Stack direction="row" spacing={2} alignItems="center">
