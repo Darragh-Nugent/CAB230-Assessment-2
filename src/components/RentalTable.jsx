@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Box, Rating, Typography, Grid, Card, CardContent } from "@mui/material";
-import { DataGrid, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
+import { DataGrid, getGridNumericOperators, getGridStringOperators, useGridApiRef  } from '@mui/x-data-grid';
 
 import PropertyRating from './PropertyRating.jsx';
 import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.jsx";
@@ -20,6 +20,8 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
     });
 
     const [sortModel, setSortModel] = useState([]);
+
+    const apiRef = useGridApiRef();
 
     const navigate = useNavigate();
 
@@ -151,6 +153,8 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
                 rows={rows}
                 columns={columns}
                 rowCount={rowCount}
+
+                apiRef={apiRef}
 
                 paginationMode="server"
                 sortingMode="server"
