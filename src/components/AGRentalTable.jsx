@@ -100,7 +100,11 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         {
             field: 'averageRating',
             headerName: 'Rating',
-            width: 150,
+            width: 160,
+            cellRenderer: Rating,
+            cellRendererParams: {
+                readOnly: true
+            }
         },
     ]);
 
@@ -159,7 +163,6 @@ export default function RentalTable({ filterModel, setFilterModel }) {
                 </AgGridProvider>
             </Box>
         </>
-
     );
 }
 
