@@ -33,16 +33,19 @@ export async function searchRentals(page, sortModel, tableFilterModel) {
     params.append("page", page)
 
 
-    if (sortModel.length > 0) {
+    if (sortModel && sortModel.length > 0) {
         params.append("sortBy", sortModel[0].colId);
         params.append("sortOrder", sortModel[0].sort);
     }
 
-    tableFilterModel.items.forEach(filterItem => {
-        if (filterItem && filterItem.filter) {
-            params.append(field, filterItem.value);
-        }
-    });
+    if (tableFilterModel && tableFilterModel.items) {
+        tableFilterModel.items.forEach(([field, value]) => {
+            if (field && value.filter) {
+                params.append(field, value.filter);
+            }
+        });
+    }
+
 
     // Object.entries(advancedFilterModel).forEach(([field, values]) => {
     //     let fieldMin;
@@ -79,15 +82,15 @@ export async function searchRentals(page, sortModel, tableFilterModel) {
     //     }
 
 
-        const response = await fetch(`${path}search?${params.toString()}`);
+    const response = await fetch(`${path}search?${params.toString()}`);
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+    return data;
+}
 
 // export async function searchRentals(paginationModel, sortModel, tableFilterModel, advancedFilterModel) {
 //     const params = new URLSearchParams();

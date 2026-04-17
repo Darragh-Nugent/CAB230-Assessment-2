@@ -33,14 +33,7 @@ export default function Rentals() {
             setFilterModel={setAdvancedFilterModel}
           />
         </Box>
-
-        <RentalTable
-          tableFilterModel={tableFilterModel}
-          setTableFilterModel={setTableFilterModel}
-          advancedFilterModel={advancedFilterModel}
-          setAdvancedFilterModel={setAdvancedFilterModel}
-        />
-
+        
         <AGRentalTable />
 
       </Container>

@@ -142,120 +142,26 @@ export default function RentalTable({ tableFilterModel, setTableFilterModel, adv
                 const pageSize = params.endRow - params.startRow;
                 const currentPageNumber = Math.floor(params.endRow / pageSize);
 
-                const nextPageData = await searchRentals(currentPageNumber, params.sortModel, params.filterModel);
-                let list = nextPageData.data;
+                try {
+                    const nextPageData = await searchRentals(currentPageNumber, params.sortModel, params.filterModel);
+                    let list = nextPageData.data;
 
-                let lastRow = -1;
+                    let lastRow = -1;
 
-                if (list.length < pageSize) {
-                    lastRow = params.startRow + list.length;
+                    if (list.length < pageSize) {
+                        lastRow = params.startRow + list.length;
+                    }
+
+                    params.successCallback(list, lastRow)
+
+                } catch {
+                    params.failCallback();
                 }
-
-                list.length
-                    ? params.successCallback(list, lastRow)
-                    : params.failCallback();
             },
         };
         params.api.setGridOption("datasource", dataSource);
     }, []);
-    // const columns = [
-    //     {
-    //         field: 'title',
-    //         headerName: 'Title',
-    //         width: 500,
-    //         filterOperators: getGridStringOperators().filter(
-    //             (op) => op.value === 'equals'
-    //         )
-    //     },
-    //     {
-    //         field: 'rent',
-    //         headerName: 'Rent',
-    //         width: 80,
-    //         filterable: false,
-    //         valueFormatter: (value) => {
-    //             if (!value || typeof value !== 'number') {
-    //                 return value;
-    //             }
-    //             return `$${value.toLocaleString()}`;
-    //         },
-    //     },
-    //     {
-    //         field: 'propertyType',
-    //         headerName: 'Property Type',
-    //         width: 150,
-    //         type: 'singleSelect',
-    //         valueOptions: propertyTypes
-    //     },
-    //     {
-    //         field: 'postcode',
-    //         headerName: 'Postcode',
-    //         width: 80,
-    //         filterOperators: getGridStringOperators().filter(
-    //             (op) => op.value === 'equals'
-    //         )
-    //     },
-    //     {
-    //         field: 'state',
-    //         headerName: 'State',
-    //         width: 80,
-    //         type: 'singleSelect',
-    //         valueOptions: states,
-    //     },
-    //     {
-    //         field: 'suburb',
-    //         headerName: 'Suburb',
-    //         width: 150,
-    //         filterOperators: getGridStringOperators().filter(
-    //             (op) => op.value === 'equals'
-    //         )
-    //     },
-    //     {
-    //         field: 'bathrooms',
-    //         headerName: '# Bathrooms',
-    //         width: 100,
-    //         filterable: false,
-    //         filterOperators: getGridNumericOperators().filter(
-    //             (op) => op.value === '>' || op.value === '<'
-    //         ),
-    //     },
-    //     {
-    //         field: 'bedrooms',
-    //         headerName: '# Bedrooms',
-    //         width: 100,
-    //         // type: 'number',
-    //         filterable: false,
-    //         filterOperators: getGridNumericOperators().filter(
-    //             (op) => op.value === '>' || op.value === '<'
-    //         ),
-    //     },
-    //     {
-    //         field: 'parkingSpaces',
-    //         headerName: '# Parks',
-    //         width: 80,
-    //         filterable: false,
-    //         filterOperators: getGridNumericOperators().filter(
-    //             (op) => op.value === '>' || op.value === '<'
-    //         ),
-    //     },
-    //     {
-    //         field: 'averageRating',
-    //         headerName: 'Rating',
-    //         width: 150,
-    //         filterable: false,
-    //         filterOperators: getGridNumericOperators().filter(
-    //             (op) => op.value === '>' || op.value === '<'
-    //         ),
-    //         renderCell: (params) => (
-    //             <Rating
-    //                 value={params.value}
-    //                 precision={0.1}
-    //                 readOnly
-    //             />
-    //         ),
-    //     }
-    // ];
-
-    // const rows = await searchRentals();
+    
     return (
         <>
             <Box sx={{ height: 650, width: '100%' }}>
