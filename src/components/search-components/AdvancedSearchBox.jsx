@@ -9,6 +9,7 @@ import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalM
 import RangeSearchOption from "./RangeSearchOption.jsx";
 import SetSearchOption from "./SetSearchOption.jsx";
 import ValueSearchOption from "./ValueSearchOption.jsx";
+import RatingSearchOption from './RatingSearchOption.jsx';
 
 export default function AdvancedSearchBox({ filterModel, setFilterModel, states, propertyTypes }) {
 
@@ -39,12 +40,16 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                 <Stack spacing={2} sx={{ flexGrow: 2 }}>
                     <ValueSearchOption label="Suburb" field="suburb" setFilterModel={setFilterModel} />
                     <ValueSearchOption label="Postcode" field="postcode" setFilterModel={setFilterModel} />
+                    
+                    <SetSearchOption set={states} label="State" field="state" setFilterModel={setFilterModel} />
+
                     <RangeSearchOption min="Minimum rent" max="Maximum rent" field="rent" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum Bathrooms" max="Maximum Bathrooms" field="bathrooms" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum Bedrooms" max="Maximum Bedrooms" field="bedrooms" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum Parking" max="Maximum Parking" field="parkingSpaces" setFilterModel={setFilterModel} />
-                    <RangeSearchOption min="Minimum Rating" max="Maximum Rating" field="averageRating" setFilterModel={setFilterModel} />
-                    <SetSearchOption set={states} label="State" field="state" setFilterModel={setFilterModel} />
+
+                    <RatingSearchOption min="Minimum Rating" max="Maximum Rating" field="averageRating" setFilterModel={setFilterModel} />
+
                     <SetSearchOption set={propertyTypes} label="Property Type" field="propertyTypes" selectionType="multiple" setFilterModel={setFilterModel} />
 
                 </Stack>
