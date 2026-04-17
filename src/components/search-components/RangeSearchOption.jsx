@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 import { Box, Stack, Typography, TextField } from "@mui/material";
 
+import NumberField from './NumberField';
+
 
 export default function RangeSearchOption(props) {
     let { min, max, field, cleared, setFilterModel } = props;
@@ -31,21 +33,23 @@ export default function RangeSearchOption(props) {
         <Stack direction="row" spacing={4}>
             <Stack spacing={1}>
                 <Typography>{min}</Typography>
-                <TextField
+                <NumberField
                     size="small"
                     label="Minimum value"
+                    min={0}
                     value={minValue}
-                    onChange={(e) => setMinValue(e.target.value)}
+                    onValueChange={(value, e) => setMinValue(value)}
                 />
             </Stack>
 
             <Stack spacing={1}>
                 <Typography>{max}</Typography>
-                <TextField
+                <NumberField
                     size="small"
                     label="Maximum value"
+                    min={0}
                     value={maxValue}
-                    onChange={(e) => setMaxValue(e.target.value)}
+                    onValueChange={(value, e) => setMaxValue(value)}
                 />
             </Stack>
         </Stack>
