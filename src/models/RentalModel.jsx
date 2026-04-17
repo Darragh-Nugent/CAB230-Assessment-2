@@ -28,7 +28,7 @@ export function getProperty(id) {
 }
 
 
-export async function searchRentals(page, sortModel, tableFilterModel) {
+export async function searchRentals(page, sortModel, filterModel) {
     const params = new URLSearchParams();
     params.append("page", page)
 
@@ -38,49 +38,58 @@ export async function searchRentals(page, sortModel, tableFilterModel) {
         params.append("sortOrder", sortModel[0].sort);
     }
 
-    if (tableFilterModel && tableFilterModel.items) {
-        tableFilterModel.items.forEach(([field, value]) => {
-            if (field && value.filter) {
-                params.append(field, value.filter);
+    if (filterModel) {
+        Object.entries(filterModel).forEach(([field, value]) => {
+            let fieldMin;
+            let fieldMax;
+
+            switch (field) {
+                case "rent":
+                    fieldMin = "minimumRent";
+                    fieldMax = "maximumRent";
+                    break;
+
+                case "bathrooms":
+                    fieldMin = "minimumBathrooms";
+                    fieldMax = "maximumBathrooms";
+                    break;
+
+                case "bedrooms":
+                    fieldMin = "minimumBedrooms";
+                    fieldMax = "maximumBedrooms";
+                    break;
+
+                case "parkingSpaces":
+                    fieldMin = "minimumParking";
+                    fieldMax = "maximumParking";
+                    break;
+
+                case "averageRating":
+                    fieldMin = "minimumRating";
+                    fieldMax = "maximumRating";
+                    break;
+                
+                case "propertyTypes":
+                    if (value && Array.isArray(value) && value.length > 0) {
+                        params.append(field, value);
+                    }
+                return;
+                break;
+
+                default:
+                    if (field && value) {
+                        params.append(field, value);
+                    }
+                    return;
+                    break;
+            }
+
+            if (field && value) {
+                if (value.min) params.append(fieldMin, value.min);
+                if (value.max) params.append(fieldMax, value.max);
             }
         });
     }
-
-
-    // Object.entries(advancedFilterModel).forEach(([field, values]) => {
-    //     let fieldMin;
-    //     let fieldMax;
-
-    //     switch (field) {
-    //         case "rent":
-    //             fieldMin = "minimumRent";
-    //             fieldMax = "maximumRent";
-    //             break;
-
-    //         case "bathrooms":
-    //             fieldMin = "minimumBathrooms";
-    //             fieldMax = "maximumBathrooms";
-    //             break;
-
-    //         case "bedrooms":
-    //             fieldMin = "minimumBedrooms";
-    //             fieldMax = "maximumBedrooms";
-    //             break;
-
-    //         case "parkingSpaces":
-    //             fieldMin = "minimumParking";
-    //             fieldMax = "maximumParking";
-    //             break;
-
-    //         case "averageRating":
-    //             fieldMin = "minimumRating";
-    //             fieldMax = "maximumRating";
-    //             break;
-
-    //         default:
-    //             break;
-    //     }
-
 
     const response = await fetch(`${path}search?${params.toString()}`);
 

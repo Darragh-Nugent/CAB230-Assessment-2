@@ -6,16 +6,37 @@ import { Box, Container, Typography } from "@mui/material";
 import RentalTable from "../components/RentalTable.jsx";
 import AGRentalTable from "../components/AGRentalTable.jsx";
 import AdvancedSearchBox from "../components/AdvancedSearchBox";
+import { getStates, getPropertyTypes } from "../models/RentalModel.jsx"
 
 export default function Rentals() {
+  const [states, setStates] = useState([]);
+  const [propertyTypes, setPropertyTypes] = useState([]);
+
   const [tableFilterModel, setTableFilterModel] = useState({ items: [] });
-  const [advancedFilterModel, setAdvancedFilterModel] = useState({
-      rent: { min: '', max: '' },
-      bedrooms: { min: '', max: '' },
-      bathrooms: { min: '', max: '' },
-      parkingSpaces: { min: '', max: '' },
-      averageRent: { min: '', max: '' },
+  const [filterModel, setFilterModel] = useState({
+    suburb: '',
+    state: '',
+    postcode: '',
+    rent: { min: '', max: '' },
+    bathrooms: { min: '', max: '' },
+    bedrooms: { min: '', max: '' },
+    parkingSpaces: { min: '', max: '' },
+    averageRating: { min: '', max: '' },
+    propertyTypes: [],
   });
+
+
+  useEffect(() => {
+    async function loadData() {
+      const statesData = await getStates();
+      const propertyTypesData = await getPropertyTypes();
+
+      setStates(statesData);
+      setPropertyTypes(propertyTypesData);
+    }
+
+    loadData();
+  }, []);
 
 
   return (
@@ -29,12 +50,17 @@ export default function Rentals() {
 
         <Box sx={{ mb: 3 }}>
           <AdvancedSearchBox
-            filterModel={advancedFilterModel}
-            setFilterModel={setAdvancedFilterModel}
+            filterModel={filterModel}
+            setFilterModel={setFilterModel}
+            states={states}
+            propertyTypes={propertyTypes}
           />
         </Box>
-        
-        <AGRentalTable />
+
+        <AGRentalTable 
+        filterModel={filterModel} 
+        setFilterModel={setFilterModel}
+        />
 
       </Container>
     </Box>

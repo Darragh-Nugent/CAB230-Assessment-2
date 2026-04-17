@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Box, Rating, Accordion, Stack, Typography, Card, CardContent, AccordionSummary, AccordionDetails, Button, TextField } from "@mui/material";
+import { Box, Rating, Accordion, Stack, Typography, Card, CardContent, AccordionSummary, AccordionDetails, Button, TextField, Select, MenuItem } from "@mui/material";
 import { DataGrid, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
 
 import NumberField from './NumberField.jsx';
 
 import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.jsx";
 import { ExpandMore } from '@mui/icons-material'
+import { propValidatorsDataGrid } from '@mui/x-data-grid/internals';
 
-export default function AdvancedSearchBox({ filterModel, setFilterModel }) {
+export default function AdvancedSearchBox({ filterModel, setFilterModel, states, propertyTypes }) {
+
     return (
         <Accordion
             sx={{
@@ -33,18 +35,19 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel }) {
                     p: 3,
                 }}>
                 <Stack spacing={2} sx={{ flexGrow: 2 }}>
-                    <AdvancedSearchOption min="Minimum rent" max="Maximum rent" field="rent" setFilterModel={setFilterModel} />
-                    <AdvancedSearchOption min="Minimum Bathrooms" max="Maximum Bathrooms" field="bathrooms" setFilterModel={setFilterModel} />
-                    <AdvancedSearchOption min="Minimum Bedrooms" max="Maximum Bedrooms" field="bedrooms" setFilterModel={setFilterModel} />
-                    <AdvancedSearchOption min="Minimum Parking" max="Maximum Parking" field="parkingSpaces" setFilterModel={setFilterModel} />
-                    <AdvancedSearchOption min="Minimum Rating" max="Maximum Rating" field="averageRating" setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum rent" max="Maximum rent" field="rent" setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum Bathrooms" max="Maximum Bathrooms" field="bathrooms" setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum Bedrooms" max="Maximum Bedrooms" field="bedrooms" setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum Parking" max="Maximum Parking" field="parkingSpaces" setFilterModel={setFilterModel} />
+                    <RangeSearchOption min="Minimum Rating" max="Maximum Rating" field="averageRating" setFilterModel={setFilterModel} />
+                    <SetSearchOption set={states} label="State" field="state" setFilterModel={setFilterModel} />
                 </Stack>
             </AccordionDetails>
         </Accordion>
     );
 }
 
-function AdvancedSearchOption(props) {
+function RangeSearchOption(props) {
     let { min, max, field, setFilterModel } = props;
 
     const [minValue, setMinValue] = useState('');
@@ -59,7 +62,6 @@ function AdvancedSearchOption(props) {
                 min: minValue,
                 max: maxValue,
             }
-
         }))
     },
         [minValue, maxValue]);
@@ -75,7 +77,7 @@ function AdvancedSearchOption(props) {
                 size="small"
                 label="Minimum value"
                 min={0}
-                type='number'
+                // type='number'
                 value={minValue}
                 onChange={(e) => setMinValue(e.target.value)}
             />
@@ -93,6 +95,44 @@ function AdvancedSearchOption(props) {
                 onChange={(e) => setMaxValue(e.target.value)}
             />
 
+        </Stack>
+    );
+}
+
+
+function SetSearchOption(props) {
+    let { set, label, field, setFilterModel } = props
+
+    const [selected, setSelected] = useState('');
+
+    useEffect(() => {
+        setFilterModel(prevFilters => ({
+
+            ...prevFilters,
+            [field]: selected,
+        }))
+    }, [selected]);
+
+
+    return (
+        <Stack direction="row" spacing={2} alignItems="center">
+            <Box sx={{ width: 180 }}>
+                <Typography>{label}</Typography>
+            </Box>
+
+            <Select
+                size="small"
+                label={label}
+                value={selected}
+                onChange={(e) => setSelected(e.target.value)}
+            >
+                <MenuItem value=""></MenuItem>
+                {
+                    set.map((value) => (
+                        <MenuItem value={value}>{value}</MenuItem>
+                    ))
+                }
+            </Select>
         </Stack>
     );
 }
