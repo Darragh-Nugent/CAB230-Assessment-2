@@ -38,6 +38,7 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                 }}>
                 <Stack spacing={2} sx={{ flexGrow: 2 }}>
                     <ValueSearchOption label="Suburb" field="suburb" setFilterModel={setFilterModel} />
+                    <ValueSearchOption label="Postcode" field="postcode" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum rent" max="Maximum rent" field="rent" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum Bathrooms" max="Maximum Bathrooms" field="bathrooms" setFilterModel={setFilterModel} />
                     <RangeSearchOption min="Minimum Bedrooms" max="Maximum Bedrooms" field="bedrooms" setFilterModel={setFilterModel} />
