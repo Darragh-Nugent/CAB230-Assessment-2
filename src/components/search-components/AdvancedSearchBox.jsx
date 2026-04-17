@@ -5,7 +5,7 @@ import { DataGrid, getGridNumericOperators, getGridStringOperators } from '@mui/
 import { ExpandMore } from '@mui/icons-material'
 import { propValidatorsDataGrid } from '@mui/x-data-grid/internals';
 
-import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalModel.jsx";
+import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalModel.js";
 import RangeSearchOption from "./RangeSearchOption.jsx";
 import SetSearchOption from "./SetSearchOption.jsx";
 import ValueSearchOption from "./ValueSearchOption.jsx";

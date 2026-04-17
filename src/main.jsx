@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useLoaderData } from 'react-router';
 
-import { getProperty } from './models/RentalModel.jsx';
+import { getProperty } from './models/RentalModel.js';
 
 import './index.css';
 

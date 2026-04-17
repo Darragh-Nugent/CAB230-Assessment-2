@@ -9,7 +9,7 @@ import { AllCommunityModule, themeAlpine, themeMaterial } from 'ag-grid-communit
 import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 
 import PropertyRating from './PropertyRating.jsx';
-import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.jsx";
+import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.js";
 import { useNavigate } from 'react-router-dom';
 
 export default function RentalTable({ filterModel, setFilterModel }) {
