@@ -53,7 +53,7 @@ export default function LoginSection() {
             </Button>
 
             <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
-                Don't have an account? <Button onClick={() => navigate('/Register')}>Sign up</Button>
+                Don't have an account? <Button variant='contained' onClick={() => navigate('/Register')}>Sign up</Button>
             </Typography>
         </>
     );

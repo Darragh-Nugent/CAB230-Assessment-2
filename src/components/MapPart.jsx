@@ -13,7 +13,7 @@ export default function MapPart({ latitude, longitude }) {
             setWidth(containerRef.current.offsetWidth);
             setHeight(containerRef.current.offsetHeight)
         }
-    }, []);
+    }, [containerRef]);
 
     return (
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}>

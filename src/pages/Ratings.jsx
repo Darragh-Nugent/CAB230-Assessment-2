@@ -9,7 +9,7 @@ import { getProperty } from "../models/RentalModel";
 
 
 export default function Ratings() {
-    const [page, setPage] = useState( {page: 0,} );
+    const [page, setPage] = useState({ page: 0, });
     const [rentals, setRentals] = useState([]);
     const [hasMore, setHasMore] = useState(true);
 
@@ -49,18 +49,21 @@ export default function Ratings() {
     }, [page]);
 
     return (
-        <Container maxWidth="xl">
-            <Grid container spacing={3} sx={{ my: 3 }}>
-                {
-                    rentals.map((curRental) => (
-                        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-                            <RentalCard rental={curRental} />
-                        </Grid>
-                    ))
-                }
-            </Grid>
-            <Box ref={ref}></Box>
-        </Container>
+        <Box sx={{ bgcolor: 'custom.backgroundLight', minHeight: '100vh', py: 4 }}>
+            <Container maxWidth="xl">
+                <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: 600 }}>My Ratings</Typography>
 
+                <Grid container spacing={3} sx={{ my: 3 }}>
+                    {
+                        rentals.map((curRental) => (
+                            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+                                <RentalCard rental={curRental} />
+                            </Grid>
+                        ))
+                    }
+                </Grid>
+                <Box ref={ref}></Box>
+            </Container>
+        </Box>
     );
 }

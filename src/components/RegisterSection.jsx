@@ -82,7 +82,7 @@ export default function RegisterSection() {
             </Button>
 
             <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
-                Already have an account? <Button onClick={() => navigate('/Login')}>Sign in</Button>
+                Already have an account? <Button variant='contained' onClick={() => navigate('/Login')}>Sign in</Button>
             </Typography>
         </>
     );

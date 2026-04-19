@@ -55,7 +55,14 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                         <ValueSearchOption label="Suburb" field="suburb" cleared={cleared} setFilterModel={setFilterModel} />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <ValueSearchOption label="Postcode" field="postcode" cleared={cleared} number={true} setFilterModel={setFilterModel} />
+                        <ValueSearchOption 
+                        label="Postcode" 
+                        field="postcode" 
+                        cleared={cleared} 
+                        number={true}
+                        errorMessage={"Must be a valid postcode"} 
+                        valueType="number"
+                        setFilterModel={setFilterModel} />
                     </Grid>
 
                     <Grid size={{ xs: 12 }}>
@@ -63,7 +70,7 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                     </Grid>
 
                     <Grid size={{ xs: 12 }}>
-                        <SetSearchOption set={propertyTypes} label="Property Type" field="propertyTypes" selectionType="multiple" cleared={cleared} setFilterModel={setFilterModel} />
+                        <SetSearchOption set={propertyTypes} label="Property Types" field="propertyTypes" selectionType="multiple" cleared={cleared} setFilterModel={setFilterModel} />
                     </Grid>
                     <Grid size={{ xs: 12 }}>
                         <RatingSearchOption min="Minimum Rating" max="Maximum Rating" field="averageRating" cleared={cleared} setFilterModel={setFilterModel} />

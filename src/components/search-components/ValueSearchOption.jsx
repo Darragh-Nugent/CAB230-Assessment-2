@@ -4,7 +4,7 @@ import { Box, Stack, Typography, TextField } from "@mui/material";
 
 
 export default function RangeSearchOption(props) {
-    let { label, field, cleared, setFilterModel, number = false} = props;
+    let { label, field, cleared, setFilterModel, number = false, errorMessage = '', valueType = "string" } = props;
 
     const [value, setValue] = useState('');
     const [error, setError] = useState('');
@@ -35,13 +35,17 @@ export default function RangeSearchOption(props) {
                 value={value}
                 onChange={(e) => {
                     let value = e.target.value
-                    if (number && Number.isInteger(Number(value))) {
+                    if (valueType === "number") {
+                        if (number && Number.isInteger(Number(value))) {
+                            setValue(value);
+                            setError('');
+                        } else {
+                            setError(errorMessage);
+                        }
+                    } else if (valueType === "string") {
                         setValue(value);
-                        setError('');
-                    } else {
-                        setError("Must be a valid postcode");
-                    }
 
+                    }
                 }}
             />
         </Stack>
