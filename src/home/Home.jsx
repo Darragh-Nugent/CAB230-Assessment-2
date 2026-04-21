@@ -7,7 +7,7 @@ import Features from "./components/Features.jsx";
 
 export default function Home() {
   return (
-    <main>n
+    <main>
       <Hero />
       <Features />
     </main>
