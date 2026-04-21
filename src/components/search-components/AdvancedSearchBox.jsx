@@ -33,7 +33,7 @@ export default function AdvancedSearchBox({ filterModel, setFilterModel, states,
                     py: 1.5,
                 }}
             >
-                <Typography variant='h5'>Advanced Search</Typography>
+                <Typography variant='h5'>Available Filters</Typography>
             </AccordionSummary>
             <AccordionDetails
                 sx={{

@@ -8,9 +8,9 @@ export default function About() {
   return (
     <Box sx={{ bgcolor: 'custom.backgroundLight', minHeight: '100vh', py: 4 }}>
       <Container maxWidth="md">
-          <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
-            About Us
-          </Typography>
+        <Typography variant="h4" sx={{ mb: 3, fontWeight: 600 }}>
+          About Us
+        </Typography>
 
         <Box
           component="img"
@@ -41,7 +41,7 @@ export default function About() {
               <br /><br />
 
               Don't believe us? here is what some of our clients had to say:
-              <br /><br />
+              <br /><br /><br />
             </Typography>
 
             <Box>
@@ -51,15 +51,17 @@ export default function About() {
               <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic', textAlign: 'right' }}>
                 - Ian, Previously in Loganhome
               </Typography>
+              <br />
             </Box>
 
             <Box>
               <Typography variant="body1" color="text.secondary" sx={{ fontStyle: 'italic' }}>
-                “Can't wait until I get another rental with them. As in, I have a week left where I currently am before I am out on the street”
+                “Can't wait until I get another rental with them. As in, I have a week left where I currently am before I am out on the street.”
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic', textAlign: 'right' }}>
                 - Sarah, Previously in Carlton, now in [unknown]
               </Typography>
+              <br />
             </Box>
 
             <Box>
@@ -69,15 +71,18 @@ export default function About() {
               <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic', textAlign: 'right' }}>
                 - Greg, Currently at St Leonards
               </Typography>
+              <br />
             </Box>
 
             <Box>
               <Typography variant="body1" color="text.secondary" sx={{ fontStyle: 'italic' }}>
-                “Yeah, nah”
+                “Yeah, nah.”
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic', textAlign: 'right' }}>
                 - Anonymous
               </Typography>
+              <br />
+
             </Box>
 
             <Typography variant="body1" color="text.primary">

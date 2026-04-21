@@ -1,6 +1,7 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
-import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent } from "@mui/material";
+import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, Button } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';
 import BathroomIcon from '@mui/icons-material/Bathroom';
@@ -9,17 +10,28 @@ import MapPart from "../components/MapPart.jsx";
 import PropertyRating from "../components/PropertyRating.jsx";
 
 export default function Property() {
-    const {property, id} = useLoaderData();
+    const { property, id } = useLoaderData();
+    const navigate = useNavigate();
 
 
     let amenities = property.amenities != null ? property.amenities.split(',') : [];
 
     return (
         <Container maxWidth="xl">
-            <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: 600 }}>{property.title}</Typography>
+            <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 3, mb: 3 }}>
+                <Button
+                    startIcon={<ArrowBackIcon />}
+                    variant="contained"
+                    onClick={() => navigate(-1)}
+                >
+                    Back
+                </Button>
 
-            <Grid container spacing={3} sx={{my: 3}}>
-                <Grid size={{ xs: 12, md: 7}}>
+                <Typography variant="h4" sx={{ fontWeight: 600 }}>{property.title}</Typography>
+            </Stack>
+
+            <Grid container spacing={3} sx={{ my: 3 }}>
+                <Grid size={{ xs: 12, md: 7 }}>
                     <Card sx={{ height: "100%", bgcolor: 'custom.card', borderRadius: 3, boxShadow: 3, }}>
                         <CardContent>
 
@@ -47,7 +59,7 @@ export default function Property() {
                             </Stack>
 
                             <Box sx={{ mt: 3 }}>
-                                <PropertyRating propertyId={id} defaultRating={property.averageRating}/>
+                                <PropertyRating propertyId={id} defaultRating={property.averageRating} />
                             </Box>
 
                             <Stack direction="row" spacing={2} sx={{ mt: 2, flexWrap: "wrap" }}>
