@@ -13,7 +13,7 @@ const featuresData = [
             return (<BalanceIcon
                 sx={{
                     color: "gold",
-                    fontSize: 50
+                    fontSize: 50,
                 }}
             />
             )

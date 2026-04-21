@@ -28,6 +28,22 @@ export default function RentalTable({ filterModel, setFilterModel }) {
 
     const gridApiRef = useRef(null);
 
+    useEffect(() => {
+        if (gridApiRef.current != null) return gridApiRef.current.setGridOption("datasource", createDataSource(filterModel));
+    }, [filterModel])
+
+    function RowLink(props) {
+        const { value, data } = props
+        return (
+            data != null ?
+                <Link onClick={() => navigate(`/rentals/${data.id}`)}>
+                    {value}
+                </Link>
+                :
+                null
+        );
+    }
+
     const defaultColDef = useMemo(() => {
         return {
             filter: false,
@@ -35,23 +51,6 @@ export default function RentalTable({ filterModel, setFilterModel }) {
             sortable: true
         };
     }, []);
-
-    useEffect(() => {
-        if (gridApiRef.current != null) return gridApiRef.current.setGridOption("datasource", createDataSource(filterModel));
-    }, [filterModel])
-
-    function RowLink(props) {
-    const {value, data} = props
-    return (
-        data != null ?
-        <Link onClick={() => navigate(`/rentals/${data.id}`)}>
-        {value}
-        </Link>
-        :
-        null
-    );
-}
-    
 
     const [columnDefs, setColumnDefs] = useState([
         {
@@ -94,14 +93,20 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         {
             field: 'bathrooms',
             headerComponentParams: {
-                innerHeaderComponent: BathroomIcon
+                innerHeaderComponent: BathroomIcon,
+                innerHeaderComponentParams: {
+                    "aria-label": "Bathrooms"
+                }
             },
             width: 80,
         },
         {
             field: 'bedrooms',
             headerComponentParams: {
-                innerHeaderComponent: BedIcon
+                innerHeaderComponent: BedIcon,
+                innerHeaderComponentParams: {
+                    "aria-label": "Bedrooms"
+                }
             },
             sortable: true,
             width: 80,
@@ -109,7 +114,10 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         {
             field: 'parkingSpaces',
             headerComponentParams: {
-                innerHeaderComponent: GarageIcon
+                innerHeaderComponent: GarageIcon,
+                innerHeaderComponentParams: {
+                    "aria-label": "Parking Spaces"
+                }
             },
             width: 80,
         },
@@ -184,7 +192,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
                         theme={theme}
                         defaultColDef={defaultColDef}
                         columnDefs={columnDefs}
-                        rowBuffer={0}
+                        rowBuffer={20}
                         rowModelType={'infinite'}
                         cacheBlockSize={10}
                         cacheOverflowSize={2}

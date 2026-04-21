@@ -24,7 +24,7 @@ const Hero = () => {
                         margin: 0
                     }}
                 >
-                    <img src={HeroImage} alt="sad fella"
+                    <img src={HeroImage} alt="Image of house"
                         style={{
                             width: '100%',
                             display: 'block'

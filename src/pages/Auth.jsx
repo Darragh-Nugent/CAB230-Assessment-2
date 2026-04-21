@@ -21,7 +21,7 @@ export default function Auth() {
                                 <Box
                                     component="img"
                                     src={loginImage}
-                                    alt="Login"
+                                    alt="Image of beautiful house"
                                     sx={{
                                         width: "100%",
                                         height: "100%",

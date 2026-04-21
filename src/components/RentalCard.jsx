@@ -32,17 +32,17 @@ export default function RentalCard({ rental }) {
 
                     <Stack direction="row" spacing={3} sx={{ mt: 2 }}>
                         <Stack direction="row" spacing={0.5}>
-                            <BedIcon fontSize="small" />
+                            <BedIcon fontSize="small" aria-label='Bedrooms' />
                             <Typography>{rental.bedrooms}</Typography>
                         </Stack>
 
                         <Stack direction="row" spacing={0.5}>
-                            <BathroomIcon fontSize="small" />
+                            <BathroomIcon fontSize="small" aria-label='Bathrooms' />
                             <Typography>{rental.bathrooms}</Typography>
                         </Stack>
 
                         <Stack direction="row" spacing={0.5}>
-                            <GarageIcon fontSize="small" />
+                            <GarageIcon fontSize="small" aria-label='Parking Spaces'/>
                             <Typography>{rental.parkingSpaces}</Typography>
                         </Stack>
                     </Stack>

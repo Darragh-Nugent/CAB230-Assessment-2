@@ -15,7 +15,7 @@ export default function About() {
         <Box
           component="img"
           src={AboutImg}
-          alt="Login"
+          alt="Image of deal in front of property"
           sx={{
             width: "100%",
             height: "100%",
@@ -40,7 +40,7 @@ export default function About() {
               New families, old families, older families who are still figuring out the will can all find a new home to sit down, relax, and argue over legal documents.
               <br /><br />
 
-              Don't believe us? here is what some of our clients had to say:
+              Don't believe us? Here is what some of our clients had to say:
               <br /><br /><br />
             </Typography>
 

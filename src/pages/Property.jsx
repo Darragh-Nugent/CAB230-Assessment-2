@@ -43,17 +43,17 @@ export default function Property() {
 
                             <Stack direction='row' spacing={4} sx={{ mt: 3 }}>
                                 <Stack direction='row' spacing={1}>
-                                    <BedIcon />
+                                    <BedIcon aria-label="Bedrooms" />
                                     <Typography variant="body1" color="primary.main">{property.bedrooms}</Typography>
                                 </Stack>
 
                                 <Stack direction='row' spacing={1}>
-                                    <BathroomIcon />
+                                    <BathroomIcon aria-label="Bathrooms"/>
                                     <Typography variant="body1" color="primary.main">{property.bathrooms}</Typography>
                                 </Stack>
 
                                 <Stack direction='row' spacing={1}>
-                                    <GarageIcon />
+                                    <GarageIcon aria-label="Parking Spaces"/>
                                     <Typography variant="body1" color="primary.main">{property.parkingSpaces}</Typography>
                                 </Stack>
                             </Stack>
