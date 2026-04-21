@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo, useRef, } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Box, Rating, Typography, Grid, Card, CardContent, Container } from "@mui/material";
 import BedIcon from '@mui/icons-material/Bed';
@@ -10,7 +11,6 @@ import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 
 import PropertyRating from './PropertyRating.jsx';
 import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.js";
-import { useNavigate } from 'react-router-dom';
 
 export default function RentalTable({ filterModel, setFilterModel }) {
     const [rows, setRows] = useState([]);
@@ -40,12 +40,26 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         if (gridApiRef.current != null) return gridApiRef.current.setGridOption("datasource", createDataSource(filterModel));
     }, [filterModel])
 
+    function RowLink(props) {
+    const {value, data} = props
+    return (
+        data != null ?
+        <Link onClick={() => navigate(`/rentals/${data.id}`)}>
+        {value}
+        </Link>
+        :
+        null
+    );
+}
+    
+
     const [columnDefs, setColumnDefs] = useState([
         {
             field: 'title',
             headerName: 'Title',
             width: 400,
             filter: false,
+            cellRenderer: RowLink
         },
         {
             field: 'rent',
@@ -186,4 +200,5 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         </>
     );
 }
+
 

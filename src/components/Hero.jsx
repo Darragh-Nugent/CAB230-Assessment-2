@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Typography, Box, Stack, Button, Container } from '@mui/material'
 
@@ -59,6 +59,7 @@ const Hero = () => {
                         </Typography>
                         <Box>
                             <Button
+                                component={Link}
                                 variant="contained"
                                 color='secondary'
                                 onClick={(event) => navigate(`/rentals/`)}
