@@ -3,7 +3,7 @@ import { useState, useEffect, createContext } from 'react';
 
 import { useInView } from "react-intersection-observer";
 
-import RentalCard from "../components/RentalCard";
+import RentalCard from "./components/RentalCard";
 import { getRatings } from "../models/RatingModel";
 import { getProperty } from "../models/RentalModel";
 

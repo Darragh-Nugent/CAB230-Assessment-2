@@ -9,8 +9,8 @@ import BathroomIcon from '@mui/icons-material/Bathroom';
 import { AllCommunityModule, themeAlpine, themeMaterial } from 'ag-grid-community';
 import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 
-import PropertyRating from './PropertyRating.jsx';
-import { searchRentals, getStates, getPropertyTypes } from "../models/RentalModel.js";
+import PropertyRating from '../../property/components/PropertyRating.jsx';
+import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalModel.js";
 
 export default function RentalTable({ filterModel, setFilterModel }) {
     const [rows, setRows] = useState([]);

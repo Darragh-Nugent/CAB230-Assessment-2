@@ -4,8 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Alert, Snackbar, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
-import AlertBox from './AlertBox.jsx';
-import { useAuth } from '../context/AuthContext.jsx';
+import AlertBox from '../../components/AlertBox.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 export default function RegisterSection() {
     const [email, setEmail] = useState('');

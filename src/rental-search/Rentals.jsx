@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 
 import { Box, Container, Typography, Card } from "@mui/material";
 
-import AGRentalTable from "../components/AGRentalTable.jsx";
-import AdvancedSearchBox from "../components/search-components/AdvancedSearchBox.jsx"
+import AGRentalTable from "./components/AGRentalTable.jsx";
+import AdvancedSearchBox from "./components/AdvancedSearchBox.jsx"
 import { getStates, getPropertyTypes } from "../models/RentalModel.js"
 
 export default function Rentals() {

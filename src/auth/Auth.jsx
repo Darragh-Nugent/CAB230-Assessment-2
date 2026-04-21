@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
 
-import LoginSection from '../components/LoginSection.jsx';
-import RegisterSection from '../components/RegisterSection.jsx';
+import LoginSection from './components/LoginSection.jsx';
+import RegisterSection from './components/RegisterSection.jsx';
 
 import loginImage from '../assets/login-house.jpg';
 

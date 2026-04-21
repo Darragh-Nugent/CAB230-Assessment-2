@@ -1,8 +1,8 @@
 import { useState, useEffect, createContext } from 'react';
 import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent } from "@mui/material";
 
-import AlertBox from "../components/AlertBox.jsx";
-import { getRating, postRating } from "../models/RatingModel.js"
+import AlertBox from "../../components/AlertBox.jsx";
+import { getRating, postRating } from "../../models/RatingModel.js"
 
 export default function PropertyRating({ propertyId, defaultRating }) {
     const [rating, setRating] = useState(defaultRating);

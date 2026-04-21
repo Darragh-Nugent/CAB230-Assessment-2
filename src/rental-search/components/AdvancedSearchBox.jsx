@@ -6,10 +6,10 @@ import { ExpandMore } from '@mui/icons-material'
 import { propValidatorsDataGrid } from '@mui/x-data-grid/internals';
 
 import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalModel.js";
-import RangeSearchOption from "./RangeSearchOption.jsx";
-import SetSearchOption from "./SetSearchOption.jsx";
-import ValueSearchOption from "./ValueSearchOption.jsx";
-import RatingSearchOption from './RatingSearchOption.jsx';
+import RangeSearchOption from "./search-components/RangeSearchOption.jsx";
+import SetSearchOption from "./search-components/SetSearchOption.jsx";
+import ValueSearchOption from "./search-components/ValueSearchOption.jsx";
+import RatingSearchOption from './search-components/RatingSearchOption.jsx';
 
 export default function AdvancedSearchBox({ filterModel, setFilterModel, states, propertyTypes }) {
     const [cleared, setCleared] = useState(false);

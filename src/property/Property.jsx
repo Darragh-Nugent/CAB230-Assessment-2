@@ -6,8 +6,8 @@ import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';
 import BathroomIcon from '@mui/icons-material/Bathroom';
 
-import MapPart from "../components/MapPart.jsx";
-import PropertyRating from "../components/PropertyRating.jsx";
+import MapPart from "./components/MapPart.jsx";
+import PropertyRating from "./components/PropertyRating.jsx";
 
 export default function Property() {
     const { property, id } = useLoaderData();
