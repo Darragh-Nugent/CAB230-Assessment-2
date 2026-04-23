@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 import NumberField from './NumberField';
 
@@ -13,7 +13,6 @@ export default function RangeSearchOption(props) {
 
     useEffect(() => {
         setFilterModel(prevFilters => ({
-
             ...prevFilters,
             [field]: {
                 ...prevFilters[field],

@@ -22,6 +22,7 @@ export default function Property() {
                 <Button
                     startIcon={<ArrowBackIcon />}
                     variant="contained"
+                    label = "back"
                     onClick={() => navigate(-1)}
                 >
                     Back

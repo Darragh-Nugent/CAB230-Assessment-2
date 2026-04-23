@@ -11,7 +11,6 @@ import { getProperty } from "../../api/rentalApi";
 export default function Ratings() {
     const [page, setPage] = useState({ page: 0, });
     const [rentals, setRentals] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
 
     const { ref, inView } = useInView({
@@ -20,20 +19,20 @@ export default function Ratings() {
 
     });
 
+    // Checks if box at bottom of grid is in view
     useEffect(() => {
-        if (inView && hasMore && !loading) {
+        if (inView && hasMore) {
             setPage(
                 prev => ({
                     ...prev,
                     page: prev.page + 1
                 }));
         }
-    }, [inView, loading]);
+    }, [inView]);
 
 
     useEffect(() => {
         async function loadRatings() {
-            setLoading(true)
             const newRatings = await getRatings(page);
 
             const newProperties = await Promise.all(newRatings.data.map(async (rating) => {
@@ -46,15 +45,11 @@ export default function Ratings() {
                 };
             }))
 
-            // let filtered = newProperties.filter(property =>)
             setRentals(prev => ([...prev, ...newProperties]));
 
             if (newRatings.pagination.nextPage === null) {
                 setHasMore(false);
             }
-
-            setLoading(false);
-
         }
 
         loadRatings();

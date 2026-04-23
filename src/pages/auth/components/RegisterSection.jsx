@@ -35,8 +35,8 @@ export default function RegisterSection() {
 
     return (
         <>
-            <AlertBox message={errorMessage} setMessage={setErrorMessage} severity={"error"}/>
-        
+            <AlertBox message={errorMessage} setMessage={setErrorMessage} severity={"error"} />
+
             <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>Register</Typography>
 
             <Stack spacing={2} sx={{ mt: 2, flexWrap: "wrap" }}>
@@ -91,6 +91,7 @@ export default function RegisterSection() {
     async function validateInputs() {
         let valid = true;
 
+        // regix to check if value is a valid email
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!re.test(String(email).toLowerCase())) {
             setEmailError(true);

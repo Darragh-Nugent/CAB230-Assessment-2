@@ -61,6 +61,7 @@ export default function LoginSection() {
     async function validateInputs() {
         let valid = true;
 
+        // regix to check if value is a valid email
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!re.test(String(email).toLowerCase())) {
             setEmailError(true);

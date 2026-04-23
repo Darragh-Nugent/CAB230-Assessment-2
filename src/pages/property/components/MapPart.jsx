@@ -16,6 +16,7 @@ export default function MapPart({ latitude, longitude }) {
     }, [containerRef]);
 
     return (
+        // Place map part in div. Otherwise it does not recognise percentage sizes
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
             {width > 0 && (
                 <Map

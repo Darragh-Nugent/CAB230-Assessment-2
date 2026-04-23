@@ -24,6 +24,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         if (gridApiRef.current != null) return gridApiRef.current.setGridOption("datasource", createDataSource(filterModel));
     }, [filterModel])
 
+    // Place components in a container component. Otheriwise the grid tries to pass its own parameters into the components
     function RatingHeader(props) {
         if (props.data) {
             return <Rating value={props.value} readOnly />;
@@ -152,7 +153,8 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         },
     ]);
 
-
+    // Create the source fot the data every time the sorting or filtering changes. Otherwise, even when the state variables change
+    // it doesn't update the datasource
     const createDataSource = filterModel => {
         return (
             {
