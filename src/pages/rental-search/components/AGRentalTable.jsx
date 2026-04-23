@@ -9,7 +9,7 @@ import BathroomIcon from '@mui/icons-material/Bathroom';
 import { AllCommunityModule, themeAlpine } from 'ag-grid-community';
 import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 
-import { searchRentals } from "../../../models/RentalModel.js";
+import { searchRentals } from "../../../api/rentalApi.js";
 
 export default function RentalTable({ filterModel, setFilterModel }) {
 

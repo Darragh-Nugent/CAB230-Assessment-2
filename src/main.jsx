@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { getProperty } from './models/RentalModel.js';
+import { getProperty } from './api/rentalApi.js';
 
 import './index.css';
 
