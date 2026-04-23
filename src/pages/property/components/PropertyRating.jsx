@@ -15,6 +15,7 @@ export default function PropertyRating({ propertyId, defaultRating }) {
         try {
             await postRating(propertyId, newRating);
             setRating(newRating);
+            setIsUserRated(true);
             setMessage("Rating saved");
             setSeverity("success");
 
