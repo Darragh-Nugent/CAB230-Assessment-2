@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import { Box, Rating, Accordion, Stack, Typography, Card, CardContent, AccordionSummary, AccordionDetails, Button, TextField, Select, MenuItem, Grid } from "@mui/material";
-import { DataGrid, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
+import { Accordion, Typography, AccordionSummary, AccordionDetails, Button, Grid } from "@mui/material";
 import { ExpandMore } from '@mui/icons-material'
-import { propValidatorsDataGrid } from '@mui/x-data-grid/internals';
 
-import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalModel.js";
 import RangeSearchOption from "./search-components/RangeSearchOption.jsx";
 import SetSearchOption from "./search-components/SetSearchOption.jsx";
 import ValueSearchOption from "./search-components/ValueSearchOption.jsx";

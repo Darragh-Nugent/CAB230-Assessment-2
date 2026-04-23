@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
-import { Alert, Snackbar, Typography, Grid, Stack, Rating, Chip, Card, CardContent, FormControl, FormLabel, FormHelperText, TextField, Button } from "@mui/material";
+import { Typography, Stack, TextField, Button } from "@mui/material";
 
-import AlertBox from '../../components/AlertBox.jsx';
-import { useAuth } from '../../context/AuthContext.jsx';
+import AlertBox from '../../../components/AlertBox.jsx';
+import { useAuth } from '../../../context/AuthContext.jsx';
 
 export default function RegisterSection() {
     const [email, setEmail] = useState('');

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Box, Stack, Typography, Select, MenuItem } from "@mui/material";
+import { Stack, Typography, Select, MenuItem } from "@mui/material";
 
 export default function SetSearchOption(props) {
     let { set, label, field, cleared, setFilterModel, selectionType = "single" } = props

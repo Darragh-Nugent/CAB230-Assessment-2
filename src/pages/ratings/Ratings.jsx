@@ -1,11 +1,11 @@
-import { Box, Rating, Typography, Grid, Card, CardContent, Container } from "@mui/material";
-import { useState, useEffect, createContext } from 'react';
+import { Box, Typography, Grid, Container } from "@mui/material";
+import { useState, useEffect } from 'react';
 
 import { useInView } from "react-intersection-observer";
 
 import RentalCard from "./components/RentalCard";
-import { getRatings } from "../models/RatingModel";
-import { getProperty } from "../models/RentalModel";
+import { getRatings } from "../../models/RatingModel";
+import { getProperty } from "../../models/RentalModel";
 
 
 export default function Ratings() {

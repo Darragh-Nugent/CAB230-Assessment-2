@@ -7,12 +7,12 @@ import { getProperty } from './models/RentalModel.js';
 import './index.css';
 
 import App from './App.jsx';
-import Home from './home/Home.jsx';
-import Rentals from './rental-search/Rentals.jsx';
-import About from './about/About.jsx';
-import Property from './property/Property.jsx';
-import Auth from './auth/Auth.jsx';
-import Ratings from './ratings/Ratings.jsx'
+import Home from './pages/home/Home.jsx';
+import Rentals from './pages/rental-search/Rentals.jsx';
+import About from './pages/about/About.jsx';
+import Property from './pages/property/Property.jsx';
+import Auth from './pages/auth/Auth.jsx';
+import Ratings from './pages/ratings/Ratings.jsx'
 
 
 const router = createBrowserRouter([

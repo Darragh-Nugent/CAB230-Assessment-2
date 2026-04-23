@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Box, Grid, Stack, Typography, TextField, Rating } from "@mui/material";
+import { Grid, Stack, Typography, Rating } from "@mui/material";
 
 
 export default function RatingSearchOption(props) {

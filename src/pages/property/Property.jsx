@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 
-import { Box, Container, Typography, Grid, Stack, Rating, Chip, Card, CardContent, Button } from "@mui/material";
+import { Box, Container, Typography, Grid, Stack, Chip, Card, CardContent, Button } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';

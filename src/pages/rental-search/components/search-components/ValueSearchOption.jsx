@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Stack, Typography, TextField } from "@mui/material";
 
 
 export default function RangeSearchOption(props) {

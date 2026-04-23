@@ -1,5 +1,4 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { useState, useEffect, createContext } from 'react';
+import { Outlet } from "react-router-dom";
 
 import './App.css';
 
@@ -10,7 +9,7 @@ import Footer from "./components/Footer";
 import AuthProvider from "./context/AuthContext.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
 
-import { ThemeProvider, CssBaseline, Snackbar, IconButton } from '@mui/material';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from './assets/theme';
 
 function AppLayout() {

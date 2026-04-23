@@ -1,25 +1,17 @@
 import { useState, useEffect, useCallback, useMemo, useRef, } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { Box, Rating, Typography, Grid, Card, CardContent, Container } from "@mui/material";
+import { Box, Rating } from "@mui/material";
 import BedIcon from '@mui/icons-material/Bed';
 import GarageIcon from '@mui/icons-material/Garage';
 import BathroomIcon from '@mui/icons-material/Bathroom';
 
-import { AllCommunityModule, themeAlpine, themeMaterial } from 'ag-grid-community';
+import { AllCommunityModule, themeAlpine } from 'ag-grid-community';
 import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 
-import PropertyRating from '../../property/components/PropertyRating.jsx';
-import { searchRentals, getStates, getPropertyTypes } from "../../models/RentalModel.js";
+import { searchRentals } from "../../../models/RentalModel.js";
 
 export default function RentalTable({ filterModel, setFilterModel }) {
-    const [rows, setRows] = useState([]);
-    const [rowCount, setRowCount] = useState(0);
-
-    const [paginationModel, setPaginationModel] = useState({
-        page: 0,       // DataGrid is 0-based
-        pageSize: 10,
-    });
 
     const navigate = useNavigate();
 

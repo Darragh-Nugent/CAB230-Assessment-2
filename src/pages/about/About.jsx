@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Box, Rating, Accordion, Stack, Typography, Card, CardContent, AccordionSummary, AccordionDetails, Button, TextField, Select, MenuItem, Grid, Container } from "@mui/material";
+import { Box, Typography, Card, CardContent, Container } from "@mui/material";
 
-import AboutImg from "../assets/about.jpg"
+import AboutImg from "../../assets/about.jpg"
 
 export default function About() {
   return (

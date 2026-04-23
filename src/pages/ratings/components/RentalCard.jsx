@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Rating, Typography, Grid, Card, CardContent, Container, Stack } from "@mui/material";
+import { Rating, Typography, Card, CardContent, Stack } from "@mui/material";
 import BedIcon from '@mui/icons-material/Bed';
 import BathroomIcon from '@mui/icons-material/Bathroom';
 import GarageIcon from '@mui/icons-material/Garage';

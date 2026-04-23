@@ -5,13 +5,12 @@ import { Box, Container, Typography, Card } from "@mui/material";
 
 import AGRentalTable from "./components/AGRentalTable.jsx";
 import AdvancedSearchBox from "./components/AdvancedSearchBox.jsx"
-import { getStates, getPropertyTypes } from "../models/RentalModel.js"
+import { getStates, getPropertyTypes } from "../../models/RentalModel.js"
 
 export default function Rentals() {
   const [states, setStates] = useState([]);
   const [propertyTypes, setPropertyTypes] = useState([]);
 
-  const [tableFilterModel, setTableFilterModel] = useState({ items: [] });
   const [filterModel, setFilterModel] = useState({
     suburb: '',
     state: '',
