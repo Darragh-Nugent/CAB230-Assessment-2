@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { Typography, Box, Stack, Button, Container } from '@mui/material'
 
-import HeroImage from '../../../assets/login-house.jpg'
+import HeroImage from '../../../../assets/login-house.jpg'
 
 const Hero = () => {
     const navigate = useNavigate();

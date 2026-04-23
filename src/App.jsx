@@ -10,7 +10,7 @@ import AuthProvider from "./context/AuthContext.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
 
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import theme from './assets/theme';
+import theme from '../assets/theme';
 
 function AppLayout() {
   const { message, setMessage } = useAuth();

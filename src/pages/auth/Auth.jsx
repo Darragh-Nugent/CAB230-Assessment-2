@@ -5,7 +5,7 @@ import { Box, Container, Grid, Card, CardContent } from "@mui/material";
 import LoginSection from './components/LoginSection.jsx';
 import RegisterSection from './components/RegisterSection.jsx';
 
-import loginImage from '../../assets/login-house.jpg';
+import loginImage from '../../../assets/login-house.jpg';
 
 export default function Auth() {
     const location = useLocation();

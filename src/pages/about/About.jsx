@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, Typography, Card, CardContent, Container } from "@mui/material";
 
-import AboutImg from "../../assets/about.jpg"
+import AboutImg from "../../../assets/about.jpg"
 
 export default function About() {
   return (
