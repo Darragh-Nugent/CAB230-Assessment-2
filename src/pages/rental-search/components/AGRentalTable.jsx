@@ -153,7 +153,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
     ]);
 
 
-    const createDataSource = async filterModel => {
+    const createDataSource = filterModel => {
         return (
             {
                 rowCount: undefined,

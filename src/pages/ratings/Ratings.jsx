@@ -11,21 +11,29 @@ import { getProperty } from "../../api/rentalApi";
 export default function Ratings() {
     const [page, setPage] = useState({ page: 0, });
     const [rentals, setRentals] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
 
     const { ref, inView } = useInView({
         threshold: 0,
+        rootMargin: "200px",
+
     });
 
     useEffect(() => {
-        if (inView && hasMore) {
-            setPage(prev => prev + 1);
+        if (inView && hasMore && !loading) {
+            setPage(
+                prev => ({
+                    ...prev,
+                    page: prev.page + 1
+                }));
         }
-    }, [inView]);
+    }, [inView, loading]);
 
 
     useEffect(() => {
         async function loadRatings() {
+            setLoading(true)
             const newRatings = await getRatings(page);
 
             const newProperties = await Promise.all(newRatings.data.map(async (rating) => {
@@ -38,32 +46,43 @@ export default function Ratings() {
                 };
             }))
 
+            // let filtered = newProperties.filter(property =>)
             setRentals(prev => ([...prev, ...newProperties]));
 
             if (newRatings.pagination.nextPage === null) {
                 setHasMore(false);
             }
+
+            setLoading(false);
+
         }
 
         loadRatings();
     }, [page]);
 
     return (
-        <Box sx={{ bgcolor: 'custom.backgroundLight', minHeight: '100vh', py: 4 }}>
-            <Container maxWidth="xl">
-                <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: 600 }}>My Ratings</Typography>
+        <>
+            <Box sx={{ bgcolor: 'custom.backgroundLight', minHeight: '120vh', py: 4 }}>
+                <Container maxWidth="xl">
+                    <Typography variant="h4" sx={{ mb: 3, mt: 3, fontWeight: 600 }}>My Ratings</Typography>
 
-                <Grid container spacing={3} sx={{ my: 3 }}>
-                    {
-                        rentals.map((curRental) => (
-                            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-                                <RentalCard rental={curRental} />
-                            </Grid>
-                        ))
-                    }
-                </Grid>
-                <Box ref={ref}></Box>
-            </Container>
-        </Box>
+                    <Grid container spacing={3} sx={{ my: 3 }}>
+                        {
+                            rentals.map((curRental) => (
+                                <Grid key={curRental.rentalId + curRental.dateTime} size={{ xs: 12, md: 6, lg: 4 }}>
+                                    <RentalCard rental={curRental} />
+                                </Grid>
+                            ))
+                        }
+
+                        <Grid item xs={12}>
+                            <Box ref={ref} sx={{ height: 20 }} />
+                        </Grid>
+                    </Grid>
+
+                </Container>
+            </Box>
+        </>
+
     );
 }

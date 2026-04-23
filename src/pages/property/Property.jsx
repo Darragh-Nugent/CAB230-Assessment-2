@@ -18,7 +18,7 @@ export default function Property() {
 
     return (
         <Container maxWidth="xl">
-            <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 3, mb: 3 }}>
+            <Stack direction="row" spacing={2} sx={{ mt: 3, mb: 3 }}>
                 <Button
                     startIcon={<ArrowBackIcon />}
                     variant="contained"
@@ -68,8 +68,8 @@ export default function Property() {
                                 </Box>
 
                                 {amenities.map((amenity) => (
-                                    <Box>
-                                        <Chip key={amenity} label={amenity} color="primary" sx={{ mt: 1 }} />
+                                    <Box  key={amenity}>
+                                        <Chip  label={amenity} color="primary" sx={{ mt: 1 }} />
                                     </Box>
                                 ))}
                             </Stack>
