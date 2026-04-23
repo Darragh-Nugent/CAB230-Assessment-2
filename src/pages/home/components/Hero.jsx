@@ -60,9 +60,9 @@ const Hero = () => {
                         <Box>
                             <Button
                                 component={Link}
+                                to="/rentals"
                                 variant="contained"
                                 color='secondary'
-                                onClick={(event) => navigate(`/rentals/`)}
                             >
                                 Browse Rentals
                             </Button>

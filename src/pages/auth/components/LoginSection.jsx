@@ -28,7 +28,7 @@ export default function LoginSection() {
 
             <Typography variant="h3" color="primary.main" sx={{ fontWeight: 600 }}>Login</Typography>
 
-            <Stack spacing={2} alignItems="center" sx={{ mt: 2, flexWrap: "wrap" }}>
+            <Stack spacing={2} sx={{ mt: 2, flexWrap: "wrap" }}>
                 <TextField
                     id="email"
                     label="Email"

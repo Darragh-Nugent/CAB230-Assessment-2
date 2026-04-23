@@ -24,6 +24,30 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         if (gridApiRef.current != null) return gridApiRef.current.setGridOption("datasource", createDataSource(filterModel));
     }, [filterModel])
 
+    function RatingHeader(props) {
+        if (props.data) {
+            return <Rating value={props.value} readOnly />;
+        }
+    }
+
+    function BedHeader() {
+        return (
+            <BedIcon fontSize="small" />
+        );
+    }
+
+    function BathHeader() {
+        return (
+            <BathroomIcon fontSize="small" />
+        );
+    }
+
+    function GarageHeader() {
+        return (
+            <GarageIcon fontSize="small" />
+        );
+    }
+
     function RowLink(props) {
         const { value, data } = props
         return (
@@ -60,7 +84,11 @@ export default function RentalTable({ filterModel, setFilterModel }) {
                 fontWeight: 600,
                 color: '#40231b', // primary.main
             },
-            valueFormatter: (params) => `$${params.value}`,
+            valueFormatter: (params) => {
+                if (params.value) {
+                    `$${params.value}`
+                }
+            },
         },
         {
             field: 'propertyType',
@@ -85,7 +113,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         {
             field: 'bathrooms',
             headerComponentParams: {
-                innerHeaderComponent: BathroomIcon,
+                innerHeaderComponent: BathHeader,
                 innerHeaderComponentParams: {
                     "aria-label": "Bathrooms"
                 }
@@ -95,7 +123,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         {
             field: 'bedrooms',
             headerComponentParams: {
-                innerHeaderComponent: BedIcon,
+                innerHeaderComponent: BedHeader,
                 innerHeaderComponentParams: {
                     "aria-label": "Bedrooms"
                 }
@@ -106,7 +134,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         {
             field: 'parkingSpaces',
             headerComponentParams: {
-                innerHeaderComponent: GarageIcon,
+                innerHeaderComponent: GarageHeader,
                 innerHeaderComponentParams: {
                     "aria-label": "Parking Spaces"
                 }
@@ -117,7 +145,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
             field: 'averageRating',
             headerName: 'Rating',
             width: 160,
-            cellRenderer: Rating,
+            cellRenderer: RatingHeader,
             cellRendererParams: {
                 readOnly: true
             }
@@ -125,7 +153,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
     ]);
 
 
-    const createDataSource = filterModel => {
+    const createDataSource = async filterModel => {
         return (
             {
                 rowCount: undefined,
@@ -155,7 +183,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
 
     const onGridReady = useCallback(async (params) => {
         gridApiRef.current = params.api;
-        params.api.setGridOption("datasource", createDataSource(filterModel));
+        params.api.setGridOption("datasource", await createDataSource(filterModel));
     }, [filterModel]);
 
     return (
