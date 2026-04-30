@@ -31,6 +31,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         }
     }
 
+    // Add wrapper functions. Otherwise the grid attempts to pass props into the icons
     function BedHeader() {
         return (
             <BedIcon fontSize="small" />
@@ -153,7 +154,7 @@ export default function RentalTable({ filterModel, setFilterModel }) {
         },
     ]);
 
-    // Create the source fot the data every time the sorting or filtering changes. Otherwise, even when the state variables change
+    // Create the source for the data every time the sorting or filtering changes. Otherwise, even when the state variables change
     // it doesn't update the datasource
     const createDataSource = filterModel => {
         return (
