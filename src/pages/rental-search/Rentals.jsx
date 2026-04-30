@@ -26,8 +26,19 @@ export default function Rentals() {
 
   useEffect(() => {
     async function loadData() {
-      const statesData = await getStates();
-      const propertyTypesData = await getPropertyTypes();
+      let statesData;
+      try {
+        statesData = await getStates();
+      } catch {
+        statesData = NULL;
+      }
+
+      let propertyTypesData;
+      try {
+        propertyTypesData = await getPropertyTypes();
+      } catch {
+        propertyTypesData = NULL;
+      }
 
       setStates(statesData);
       setPropertyTypes(propertyTypesData);
