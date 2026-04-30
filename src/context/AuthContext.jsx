@@ -29,6 +29,7 @@ export default function AuthProvider({ children }) {
             await register(email, password);
             setIsAuthenticated(true);
             setMessage('Registration successful!');
+            handleLogin(email, password);
         } catch (error) {
             console.error('Registration error:', error);
             throw error;
